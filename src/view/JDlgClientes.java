@@ -437,10 +437,9 @@ public class JDlgClientes extends javax.swing.JDialog {
     private void jBtnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarClienteActionPerformed
         // TODO add your handling code here:
         //pesquisa = true;
-        //JDlgPesquisarClientes jDlgPesquisarClientes = new JDlgPesquisarClientes(null, true);
-        //jDlgPesquisarClientes.setTelaPai(this);
-        //jDlgPesquisarClientes.setVisible(true);
-        Util.mensagem("Não implementado!");
+        JDlgClientePesquisar jDlgClientePesquisar = new JDlgClientePesquisar(null, true);
+        jDlgClientePesquisar.setTelaPai(this);
+        jDlgClientePesquisar.setVisible(true);
         
     }//GEN-LAST:event_jBtnPesquisarClienteActionPerformed
 

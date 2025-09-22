@@ -515,11 +515,9 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     private void jBtnPesquisarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarUsuActionPerformed
         // TODO add your handling code here:
         //pesquisa = true;
-        //JDlgPesquisarUsuarios jDlgPesquisarUsuarios = new JDlgPesquisarUsuarios(null, true);
-        //jDlgPesquisarUsuarios.setTelaPai(this);
-        //jDlgPesquisarUsuarios.setVisible(true);
-        Util.mensagem("Não implementado!");
-        
+        JDlgUsuariosPesquisar jDlgUsuariosPesquisar = new JDlgUsuariosPesquisar(null, true);
+        jDlgUsuariosPesquisar.setTelaPai(this);
+        jDlgUsuariosPesquisar.setVisible(true);        
     }//GEN-LAST:event_jBtnPesquisarUsuActionPerformed
 
     private void jBtnConfirmarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarUsuActionPerformed
