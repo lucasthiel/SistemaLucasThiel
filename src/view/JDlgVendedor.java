@@ -257,7 +257,7 @@ public class JDlgVendedor extends javax.swing.JDialog {
 
     private void jBtnExcluirVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirVendedorActionPerformed
         // TODO add your handling code here:
-        
+        Util.perguntar("Deseja excluir o registro?");
     }//GEN-LAST:event_jBtnExcluirVendedorActionPerformed
 
     private void jBtnAlterarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarVendedorActionPerformed
@@ -271,7 +271,9 @@ public class JDlgVendedor extends javax.swing.JDialog {
         //pesquisa = true;
         //JDlgPesquisarVendedor jDlgPesquisarVendedor = new JDlgPesquisarVendedor(null, true);
         //jDlgPesquisarVendedor.setTelaPai(this);
-        //jDlgPesquisarVendedor.setVisible(true);   
+        //jDlgPesquisarVendedor.setVisible(true);
+        Util.mensagem("Não implementado!");
+        
     }//GEN-LAST:event_jBtnPesquisarVendedorActionPerformed
 
     /**

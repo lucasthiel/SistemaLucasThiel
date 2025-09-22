@@ -242,6 +242,8 @@ public class JDlgProdutos extends javax.swing.JDialog {
         //JDlgPesquisarProdutos jDlgPesquisarProdutos = new JDlgPesquisarProdutos(null, true);
         //jDlgPesquisarProdutos.setTelaPai(this);
         //jDlgPesquisarProdutos.setVisible(true);
+        Util.mensagem("Não implementado!");
+        
     }//GEN-LAST:event_jBtnPesquisarProdutoActionPerformed
 
     private void jBtnIncluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdutoActionPerformed
@@ -264,7 +266,7 @@ public class JDlgProdutos extends javax.swing.JDialog {
 
     private void jBtnExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdutoActionPerformed
         // TODO add your handling code here:
-        
+        Util.perguntar("Deseja excluir o registro?");
     }//GEN-LAST:event_jBtnExcluirProdutoActionPerformed
 
     private void jBtnAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdutoActionPerformed

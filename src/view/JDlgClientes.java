@@ -418,7 +418,7 @@ public class JDlgClientes extends javax.swing.JDialog {
 
     private void jBtnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirClienteActionPerformed
         // TODO add your handling code here:
-        
+       Util.perguntar("Deseja excluir o registro?"); 
 
     }//GEN-LAST:event_jBtnExcluirClienteActionPerformed
 
@@ -440,7 +440,7 @@ public class JDlgClientes extends javax.swing.JDialog {
         //JDlgPesquisarClientes jDlgPesquisarClientes = new JDlgPesquisarClientes(null, true);
         //jDlgPesquisarClientes.setTelaPai(this);
         //jDlgPesquisarClientes.setVisible(true);
-        Util.mensagem("Nao Implementado.");
+        Util.mensagem("Não implementado!");
         
     }//GEN-LAST:event_jBtnPesquisarClienteActionPerformed
 
