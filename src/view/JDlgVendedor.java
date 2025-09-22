@@ -17,6 +17,8 @@ public class JDlgVendedor extends javax.swing.JDialog {
      * Creates new form JDlgVendedor
      */
     
+    boolean pesquisando = false;
+    
     public JDlgVendedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -241,23 +243,31 @@ public class JDlgVendedor extends javax.swing.JDialog {
         // TODO add your handling code here:
         Util.habilitar(true, jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor, jBtnConfirmarVendedor, jBtnCancelarVendedor);
         Util.habilitar(false, jBtnIncluirVendedor, jBtnAlterarVendedor, jBtnExcluirVendedor, jBtnPesquisarVendedor);
+        Util.limpar(jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor);
     }//GEN-LAST:event_jBtnIncluirVendedorActionPerformed
 
     private void jBtnCancelarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarVendedorActionPerformed
         // TODO add your handling code here:
         Util.habilitar(false, jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor, jBtnConfirmarVendedor, jBtnCancelarVendedor);
         Util.habilitar(true, jBtnIncluirVendedor, jBtnAlterarVendedor, jBtnExcluirVendedor, jBtnPesquisarVendedor);
+        Util.limpar(jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor);
     }//GEN-LAST:event_jBtnCancelarVendedorActionPerformed
 
     private void jBtnConfirmarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarVendedorActionPerformed
         // TODO add your handling code here:
         Util.habilitar(false, jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor, jBtnConfirmarVendedor, jBtnCancelarVendedor);
         Util.habilitar(true, jBtnIncluirVendedor, jBtnAlterarVendedor, jBtnExcluirVendedor, jBtnPesquisarVendedor);
+        Util.limpar(jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor);
     }//GEN-LAST:event_jBtnConfirmarVendedorActionPerformed
 
     private void jBtnExcluirVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirVendedorActionPerformed
         // TODO add your handling code here:
-        Util.perguntar("Deseja excluir o registro?");
+        if (pesquisando == false) {
+            Util.mensagem("Você precisa pesquisar um usuário primeiro");
+        } else {
+                Util.perguntar("Você deseja excluir?");
+                Util.limpar(jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor);  
+        }
     }//GEN-LAST:event_jBtnExcluirVendedorActionPerformed
 
     private void jBtnAlterarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarVendedorActionPerformed
@@ -272,7 +282,7 @@ public class JDlgVendedor extends javax.swing.JDialog {
         JDlgVendedorPesquisar jDlgVendedorPesquisar = new JDlgVendedorPesquisar(null, true);
         jDlgVendedorPesquisar.setTelaPai(this);
         jDlgVendedorPesquisar.setVisible(true);
-        
+        pesquisando = true;
     }//GEN-LAST:event_jBtnPesquisarVendedorActionPerformed
 
     /**

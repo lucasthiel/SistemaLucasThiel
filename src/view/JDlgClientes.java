@@ -18,6 +18,8 @@ public class JDlgClientes extends javax.swing.JDialog {
      * Creates new form JDlgClientes
      */
     
+    boolean pesquisando = false;
+    
     public JDlgClientes(java.awt.Frame parent, boolean modal) {
     super(parent, modal);
     initComponents();
@@ -403,13 +405,17 @@ public class JDlgClientes extends javax.swing.JDialog {
     private void jBtnIncluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirClienteActionPerformed
         // TODO add your handling code here:
        Util.habilitar(true, jTxtCodCliente, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente, jBtnConfirmarCliente, jBtnCancelarCliente);
-       Util.habilitar(false, jBtnIncluirCliente, jBtnAlterarCliente, jBtnExcluirCliente, jBtnPesquisarCliente); 
+       Util.habilitar(false, jBtnIncluirCliente, jBtnAlterarCliente, jBtnExcluirCliente, jBtnPesquisarCliente);
+       Util.limpar(jTxtCodCliente, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente);  
+
     }//GEN-LAST:event_jBtnIncluirClienteActionPerformed
 
     private void jBtnConfirmarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarClienteActionPerformed
         // TODO add your handling code here:
        Util.habilitar(false, jTxtCodCliente, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente, jBtnConfirmarCliente, jBtnCancelarCliente);
-       Util.habilitar(true, jBtnIncluirCliente, jBtnAlterarCliente, jBtnExcluirCliente, jBtnPesquisarCliente);                
+       Util.habilitar(true, jBtnIncluirCliente, jBtnAlterarCliente, jBtnExcluirCliente, jBtnPesquisarCliente);
+       Util.limpar(jTxtCodCliente, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente);  
+                       
     }//GEN-LAST:event_jBtnConfirmarClienteActionPerformed
 
     private void jChbAtivoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChbAtivoClienteActionPerformed
@@ -418,7 +424,12 @@ public class JDlgClientes extends javax.swing.JDialog {
 
     private void jBtnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirClienteActionPerformed
         // TODO add your handling code here:
-       Util.perguntar("Deseja excluir o registro?"); 
+       if (pesquisando == false) {
+            Util.mensagem("Você precisa pesquisar um usuário primeiro");
+        } else {
+                Util.perguntar("Você deseja excluir?");
+                Util.limpar(jTxtCodCliente, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente);  
+        } 
 
     }//GEN-LAST:event_jBtnExcluirClienteActionPerformed
 
@@ -426,6 +437,8 @@ public class JDlgClientes extends javax.swing.JDialog {
         // TODO add your handling code here:
        Util.habilitar(false, jTxtCodCliente, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente, jBtnConfirmarCliente, jBtnCancelarCliente);
        Util.habilitar(true, jBtnIncluirCliente, jBtnAlterarCliente, jBtnExcluirCliente, jBtnPesquisarCliente);
+       Util.limpar(jTxtCodCliente, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente);  
+
     }//GEN-LAST:event_jBtnCancelarClienteActionPerformed
 
     private void jBtnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarClienteActionPerformed
@@ -440,7 +453,7 @@ public class JDlgClientes extends javax.swing.JDialog {
         JDlgClientePesquisar jDlgClientePesquisar = new JDlgClientePesquisar(null, true);
         jDlgClientePesquisar.setTelaPai(this);
         jDlgClientePesquisar.setVisible(true);
-        
+        pesquisando = true;
     }//GEN-LAST:event_jBtnPesquisarClienteActionPerformed
 
     private void jFmtTelefoneClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtTelefoneClienteActionPerformed

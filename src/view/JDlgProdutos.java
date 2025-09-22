@@ -18,6 +18,7 @@ public class JDlgProdutos extends javax.swing.JDialog {
      * Creates new form JDlgProdutos
      */
     
+    boolean pesquisando = false;
     
     public JDlgProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -242,30 +243,38 @@ public class JDlgProdutos extends javax.swing.JDialog {
         JDlgProdutoPesquisar jDlgProdutoPesquisar = new JDlgProdutoPesquisar(null, true);
         jDlgProdutoPesquisar.setTelaPai(this);
         jDlgProdutoPesquisar.setVisible(true);
-        
+        pesquisando = true;
     }//GEN-LAST:event_jBtnPesquisarProdutoActionPerformed
 
     private void jBtnIncluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdutoActionPerformed
         // TODO add your handling code here:
         Util.habilitar(true, jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
         Util.habilitar(false, jBtnIncluirProduto, jBtnAlterarProduto, jBtnExcluirProduto, jBtnPesquisarProduto);
+        Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
     }//GEN-LAST:event_jBtnIncluirProdutoActionPerformed
 
     private void jBtnConfirmarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarProdutoActionPerformed
         // TODO add your handling code here:
         Util.habilitar(false, jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
         Util.habilitar(true, jBtnIncluirProduto, jBtnAlterarProduto, jBtnExcluirProduto, jBtnPesquisarProduto);
+        Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
     }//GEN-LAST:event_jBtnConfirmarProdutoActionPerformed
 
     private void jBtnCancelarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarProdutoActionPerformed
         // TODO add your handling code here:
         Util.habilitar(false, jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
         Util.habilitar(true, jBtnIncluirProduto, jBtnAlterarProduto, jBtnExcluirProduto, jBtnPesquisarProduto);
+        Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
     }//GEN-LAST:event_jBtnCancelarProdutoActionPerformed
 
     private void jBtnExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdutoActionPerformed
         // TODO add your handling code here:
-        Util.perguntar("Deseja excluir o registro?");
+        if (pesquisando == false) {
+            Util.mensagem("Você precisa pesquisar um usuário primeiro");
+        } else {
+                Util.perguntar("Você deseja excluir?");
+                Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
+        }
     }//GEN-LAST:event_jBtnExcluirProdutoActionPerformed
 
     private void jBtnAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdutoActionPerformed

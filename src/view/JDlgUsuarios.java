@@ -18,6 +18,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
      * Creates new form JDlgUsuarios
      */
     
+    boolean pesquisando = false;
+    
     public JDlgUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -489,6 +491,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         // TODO add your handling code here:
         Util.habilitar(true, jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu, jBtnConfirmarUsu, jBtnCancelarUsu);
         Util.habilitar(false, jBtnIncluirUsu, jBtnAlterarUsu, jBtnExcluirUsu, jBtnPesquisarUsu);
+        Util.limpar(jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu);
     }//GEN-LAST:event_jBtnIncluirUsuActionPerformed
 
     private void jBtnAlterarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarUsuActionPerformed
@@ -505,11 +508,17 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         // TODO add your handling code here:
         Util.habilitar(false, jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu, jBtnConfirmarUsu, jBtnCancelarUsu);
         Util.habilitar(true, jBtnIncluirUsu, jBtnAlterarUsu, jBtnExcluirUsu, jBtnPesquisarUsu);
+        Util.limpar(jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu);
     }//GEN-LAST:event_jBtnCancelarUsuActionPerformed
 
     private void jBtnExcluirUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirUsuActionPerformed
         // TODO add your handling code here:
-        Util.perguntar("Deseja excluir o registro?");
+        if (pesquisando == false) {
+            Util.mensagem("Você precisa pesquisar um usuário primeiro");
+        } else {
+                Util.perguntar("Você deseja excluir?");
+                Util.limpar(jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu);  
+        }
     }//GEN-LAST:event_jBtnExcluirUsuActionPerformed
 
     private void jBtnPesquisarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarUsuActionPerformed
@@ -517,13 +526,15 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         //pesquisa = true;
         JDlgUsuariosPesquisar jDlgUsuariosPesquisar = new JDlgUsuariosPesquisar(null, true);
         jDlgUsuariosPesquisar.setTelaPai(this);
-        jDlgUsuariosPesquisar.setVisible(true);        
+        jDlgUsuariosPesquisar.setVisible(true);
+        pesquisando = true;
     }//GEN-LAST:event_jBtnPesquisarUsuActionPerformed
 
     private void jBtnConfirmarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarUsuActionPerformed
         // TODO add your handling code here:
         Util.habilitar(false, jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu, jBtnConfirmarUsu, jBtnCancelarUsu);
         Util.habilitar(true, jBtnIncluirUsu, jBtnAlterarUsu, jBtnExcluirUsu, jBtnPesquisarUsu);
+        Util.limpar(jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu);
     }//GEN-LAST:event_jBtnConfirmarUsuActionPerformed
 
     private void jFmtDataNascimentoUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtDataNascimentoUsuActionPerformed
