@@ -2,7 +2,6 @@ package bean;
 // Generated 06/10/2025 19:07:56 by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,18 +19,18 @@ import javax.persistence.Table;
 public class LltVendaProduto  implements java.io.Serializable {
 
 
-     private Integer lltIdVendaProduto;
+     private int lltIdVendaProduto;
      private int lltIdVenda;
      private int lltIdProduto;
      private int lltQuantidade;
-     private BigDecimal lltValorUnitario;
+     private double lltValorUnitario;
      private String lltStatusVenda;
      private String lltTipoEmbalagem;
 
     public LltVendaProduto() {
     }
 
-    public LltVendaProduto(int lltIdVenda, int lltIdProduto, int lltQuantidade, BigDecimal lltValorUnitario, String lltStatusVenda, String lltTipoEmbalagem) {
+    public LltVendaProduto(int lltIdVenda, int lltIdProduto, int lltQuantidade, double lltValorUnitario, String lltStatusVenda, String lltTipoEmbalagem) {
        this.lltIdVenda = lltIdVenda;
        this.lltIdProduto = lltIdProduto;
        this.lltQuantidade = lltQuantidade;
@@ -44,11 +43,11 @@ public class LltVendaProduto  implements java.io.Serializable {
 
     
     @Column(name="llt_idVendaProduto", unique=true, nullable=false)
-    public Integer getLltIdVendaProduto() {
+    public int getLltIdVendaProduto() {
         return this.lltIdVendaProduto;
     }
     
-    public void setLltIdVendaProduto(Integer lltIdVendaProduto) {
+    public void setLltIdVendaProduto(int lltIdVendaProduto) {
         this.lltIdVendaProduto = lltIdVendaProduto;
     }
 
@@ -84,11 +83,11 @@ public class LltVendaProduto  implements java.io.Serializable {
 
     
     @Column(name="llt_valorUnitario", nullable=false, precision=10)
-    public BigDecimal getLltValorUnitario() {
+    public double getLltValorUnitario() {
         return this.lltValorUnitario;
     }
     
-    public void setLltValorUnitario(BigDecimal lltValorUnitario) {
+    public void setLltValorUnitario(double lltValorUnitario) {
         this.lltValorUnitario = lltValorUnitario;
     }
 

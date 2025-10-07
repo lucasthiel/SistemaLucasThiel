@@ -2,7 +2,6 @@ package bean;
 // Generated 06/10/2025 19:07:56 by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,12 +26,12 @@ public class LltVenda  implements java.io.Serializable {
      private String lltFormaPagamento;
      private String lltModoEnvio;
      private Date lltDataVenda;
-     private BigDecimal lltValorVenda;
+     private double lltValorVenda;
 
     public LltVenda() {
     }
 
-    public LltVenda(int lltIdVenda, int lltIdCliente, int lltIdVendedor, String lltFormaPagamento, String lltModoEnvio, Date lltDataVenda, BigDecimal lltValorVenda) {
+    public LltVenda(int lltIdVenda, int lltIdCliente, int lltIdVendedor, String lltFormaPagamento, String lltModoEnvio, Date lltDataVenda, double lltValorVenda) {
        this.lltIdVenda = lltIdVenda;
        this.lltIdCliente = lltIdCliente;
        this.lltIdVendedor = lltIdVendedor;
@@ -106,11 +105,11 @@ public class LltVenda  implements java.io.Serializable {
 
     
     @Column(name="llt_valorVenda", nullable=false, precision=10)
-    public BigDecimal getLltValorVenda() {
+    public double getLltValorVenda() {
         return this.lltValorVenda;
     }
     
-    public void setLltValorVenda(BigDecimal lltValorVenda) {
+    public void setLltValorVenda(double lltValorVenda) {
         this.lltValorVenda = lltValorVenda;
     }
 

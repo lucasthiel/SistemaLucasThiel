@@ -2,7 +2,6 @@ package bean;
 // Generated 06/10/2025 19:07:56 by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,12 +23,12 @@ public class LltProduto  implements java.io.Serializable {
      private String lltTamanho;
      private String lltCategoria;
      private String lltCor;
-     private BigDecimal lltPreco;
+     private double lltPreco;
 
     public LltProduto() {
     }
 
-    public LltProduto(int lltIdProduto, String lltNomeProduto, String lltMarca, String lltTamanho, String lltCategoria, String lltCor, BigDecimal lltPreco) {
+    public LltProduto(int lltIdProduto, String lltNomeProduto, String lltMarca, String lltTamanho, String lltCategoria, String lltCor, double lltPreco) {
        this.lltIdProduto = lltIdProduto;
        this.lltNomeProduto = lltNomeProduto;
        this.lltMarca = lltMarca;
@@ -103,11 +102,11 @@ public class LltProduto  implements java.io.Serializable {
 
     
     @Column(name="llt_preco", nullable=false, precision=10)
-    public BigDecimal getLltPreco() {
+    public double getLltPreco() {
         return this.lltPreco;
     }
     
-    public void setLltPreco(BigDecimal lltPreco) {
+    public void setLltPreco(double lltPreco) {
         this.lltPreco = lltPreco;
     }
 
