@@ -4,6 +4,7 @@
  */
 package view;
 
+import bean.LltUsuario;
 import tools.Util;
 
 
@@ -28,6 +29,43 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         
         Util.habilitar(false, jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu, jBtnConfirmarUsu, jBtnCancelarUsu);
     }
+    
+    public LltUsuario viewBean() {
+    LltUsuario usuarios = new LltUsuario();
+    //usuarios.setLltIdUsuario(Util.strToInt( jTxtCodUsu.getText() ));
+    int codigo = Util.strToInt(jTxtCodUsu.getText());
+    usuarios.setLltIdUsuario(codigo);
+    usuarios.setLltNome(jTxtNomeUsu.getText());
+    usuarios.setLltApelido(jTxtApelidoUsu.getText());
+    usuarios.setLltCpf(jFmtCpfUsu.getText());
+    usuarios.setLltDataNascimento(Util.strToDate(jFmtDataNascimentoUsu.getText()));
+    usuarios.setLltSenha(jPwfSenhaUsu.getText());
+    usuarios.setLltNivel(jCboNivelUsu.getSelectedIndex());
+    if (jChbAtivoUsu.isSelected() == true) {
+        usuarios.setLltAtivo("S");
+    } else {
+        usuarios.setLltAtivo("N");
+    }
+    return usuarios;
+}
+
+public void beanView(LltUsuario usuarios) {
+    jTxtCodUsu.setText(Util.intToStr(usuarios.getLltIdUsuario()));
+    jTxtNomeUsu.setText(usuarios.getLltNome());
+    jTxtApelidoUsu.setText(usuarios.getLltApelido());
+    jFmtCpfUsu.setText(usuarios.getLltCpf());
+    jFmtDataNascimentoUsu.setText(Util.dateToStr(usuarios.getLltDataNascimento()));
+    jPwfSenhaUsu.setText(usuarios.getLltSenha());
+    jCboNivelUsu.setSelectedIndex(usuarios.getLltNivel());
+    //jChbAtivoUsu.setSelected(usuarios.getAtivo().equals("S"));
+    if (usuarios.getLltAtivo().equals("S") == true) {
+        jChbAtivoUsu.setSelected(true);
+    } else {
+        jChbAtivoUsu.setSelected(false);
+    }
+}
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.

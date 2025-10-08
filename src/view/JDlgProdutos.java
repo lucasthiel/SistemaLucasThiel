@@ -4,6 +4,7 @@
  */
 package view;
 
+import bean.LltProduto;
 import tools.Util;
 
 
@@ -27,8 +28,32 @@ public class JDlgProdutos extends javax.swing.JDialog {
         setTitle("Cadastro Produtos");
         setLocationRelativeTo(null);
         
-        Util.habilitar(false, jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
+        Util.habilitar(false, jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
     }
+    
+    public LltProduto viewBean() {
+    LltProduto produtos = new LltProduto();
+    int codigo = Util.strToInt(jTxtCodProduto.getText());
+    produtos.setLltIdProduto(codigo);
+    produtos.setLltNomeProduto(jTxtNomeProduto.getText());
+    produtos.setLltMarca(jCboMarcaProduto.getSelectedItem().toString());
+    produtos.setLltCategoria(jCboCategoriaProduto.getSelectedItem().toString());
+    produtos.setLltTamanho(jCboTamanhoProduto.getSelectedItem().toString());
+    produtos.setLltCor(jCboCorProduto.getSelectedItem().toString());
+    produtos.setLltPreco(Util.strToDouble(jTxtPrecoProduto.getText()));
+    return produtos;
+}
+
+public void beanView(LltProduto produtos) {
+    jTxtCodProduto.setText(Util.intToStr(produtos.getLltIdProduto()));
+    jTxtNomeProduto.setText(produtos.getLltNomeProduto());
+    jCboMarcaProduto.setSelectedItem(produtos.getLltMarca());
+    jCboCategoriaProduto.setSelectedItem(produtos.getLltCategoria());
+    jCboTamanhoProduto.setSelectedItem(produtos.getLltTamanho());
+    jCboCorProduto.setSelectedItem(produtos.getLltCor());
+    jTxtPrecoProduto.setText(Util.doubleToStr(produtos.getLltPreco()));
+}
+
     
     
     
@@ -54,13 +79,13 @@ public class JDlgProdutos extends javax.swing.JDialog {
         jLblCorProduto = new javax.swing.JLabel();
         jCboCorProduto = new javax.swing.JComboBox<>();
         jLblPrecoProduto = new javax.swing.JLabel();
-        jFmtPrecoProduto = new javax.swing.JFormattedTextField();
         jBtnIncluirProduto = new javax.swing.JButton();
         jBtnAlterarProduto = new javax.swing.JButton();
         jBtnExcluirProduto = new javax.swing.JButton();
         jBtnConfirmarProduto = new javax.swing.JButton();
         jBtnCancelarProduto = new javax.swing.JButton();
         jBtnPesquisarProduto = new javax.swing.JButton();
+        jTxtPrecoProduto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -91,8 +116,6 @@ public class JDlgProdutos extends javax.swing.JDialog {
         jCboCorProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rosa", "Preto", "Branco", "Azul", "Amarelo", "Vermelho", "Verde", " " }));
 
         jLblPrecoProduto.setText("Preço:");
-
-        jFmtPrecoProduto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("R$ #,###.##"))));
 
         jBtnIncluirProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/incluir.png"))); // NOI18N
         jBtnIncluirProduto.setText("Inserir");
@@ -142,6 +165,12 @@ public class JDlgProdutos extends javax.swing.JDialog {
             }
         });
 
+        jTxtPrecoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtPrecoProdutoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -175,14 +204,13 @@ public class JDlgProdutos extends javax.swing.JDialog {
                                     .addComponent(jLblCodProduto))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jCboCategoriaProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCboCorProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jFmtPrecoProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCboCategoriaProduto, javax.swing.GroupLayout.Alignment.TRAILING, 0, 195, Short.MAX_VALUE)
+                            .addComponent(jCboCorProduto, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLblCorProduto)
                             .addComponent(jLblPrecoProduto)
-                            .addComponent(jLblCategoriaProduto))))
+                            .addComponent(jLblCategoriaProduto)
+                            .addComponent(jTxtPrecoProduto))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -214,9 +242,9 @@ public class JDlgProdutos extends javax.swing.JDialog {
                     .addComponent(jCboCorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLblPrecoProduto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFmtPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jTxtPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnExcluirProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnAlterarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -248,23 +276,23 @@ public class JDlgProdutos extends javax.swing.JDialog {
 
     private void jBtnIncluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdutoActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
+        Util.habilitar(true, jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
         Util.habilitar(false, jBtnIncluirProduto, jBtnAlterarProduto, jBtnExcluirProduto, jBtnPesquisarProduto);
-        Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
+        Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
     }//GEN-LAST:event_jBtnIncluirProdutoActionPerformed
 
     private void jBtnConfirmarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarProdutoActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(false, jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
+        Util.habilitar(false, jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
         Util.habilitar(true, jBtnIncluirProduto, jBtnAlterarProduto, jBtnExcluirProduto, jBtnPesquisarProduto);
-        Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
+        Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
     }//GEN-LAST:event_jBtnConfirmarProdutoActionPerformed
 
     private void jBtnCancelarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarProdutoActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(false, jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
+        Util.habilitar(false, jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
         Util.habilitar(true, jBtnIncluirProduto, jBtnAlterarProduto, jBtnExcluirProduto, jBtnPesquisarProduto);
-        Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
+        Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
     }//GEN-LAST:event_jBtnCancelarProdutoActionPerformed
 
     private void jBtnExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdutoActionPerformed
@@ -273,15 +301,19 @@ public class JDlgProdutos extends javax.swing.JDialog {
             Util.mensagem("Você precisa pesquisar um usuário primeiro");
         } else {
                 Util.perguntar("Você deseja excluir?");
-                Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
+                Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
         }
     }//GEN-LAST:event_jBtnExcluirProdutoActionPerformed
 
     private void jBtnAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdutoActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jFmtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
+        Util.habilitar(true, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
         Util.habilitar(false, jBtnIncluirProduto, jBtnAlterarProduto, jBtnExcluirProduto, jBtnPesquisarProduto);
     }//GEN-LAST:event_jBtnAlterarProdutoActionPerformed
+
+    private void jTxtPrecoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtPrecoProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtPrecoProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,7 +368,6 @@ public class JDlgProdutos extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jCboCorProduto;
     private javax.swing.JComboBox<String> jCboMarcaProduto;
     private javax.swing.JComboBox<String> jCboTamanhoProduto;
-    private javax.swing.JFormattedTextField jFmtPrecoProduto;
     private javax.swing.JLabel jLblCategoriaProduto;
     private javax.swing.JLabel jLblCodProduto;
     private javax.swing.JLabel jLblCorProduto;
@@ -346,6 +377,7 @@ public class JDlgProdutos extends javax.swing.JDialog {
     private javax.swing.JLabel jLblTamanhoProduto;
     private javax.swing.JTextField jTxtCodProduto;
     private javax.swing.JTextField jTxtNomeProduto;
+    private javax.swing.JTextField jTxtPrecoProduto;
     // End of variables declaration//GEN-END:variables
 
 }

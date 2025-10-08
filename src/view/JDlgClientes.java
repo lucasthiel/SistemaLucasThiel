@@ -4,6 +4,7 @@
  */
 package view;
 
+import bean.LltCliente;
 import tools.Util;
 
 
@@ -47,6 +48,53 @@ public class JDlgClientes extends javax.swing.JDialog {
         jBtnCancelarCliente
     );
 }
+    public LltCliente viewBean() {
+    LltCliente clientes = new LltCliente();
+    int codigo = Util.strToInt(jTxtCodCliente.getText());
+    clientes.setLltIdCliente(codigo);
+    clientes.setLltNome(jTxtNomeCliente.getText());
+    clientes.setLltEmail(jTxtEmailCliente.getText());
+    clientes.setLltDataNascimento(Util.strToDate(jFmtDataNascimentoCliente.getText()));
+    clientes.setLltCpf(jFmtCpfCliente.getText());
+    clientes.setLltRg(jFmtRgCliente.getText());
+    clientes.setLltSexo(jCboSexoCliente.getSelectedItem().toString());
+    clientes.setLltEndereco(jTxtEnderecoCliente.getText());
+    clientes.setLltCep(jFmtCepCliente.getText());
+    clientes.setLltBairro(jTxtBairroCliente.getText());
+    clientes.setLltCidade(jTxtCidadeCliente.getText());
+    clientes.setLltCelular(jFmtCelularCliente.getText());
+    clientes.setLltTelefoneResidencial(jFmtTelefoneCliente.getText());
+    clientes.setLltReferencia(jTxtReferenciaCliente.getText());
+    if (jChbAtivoCliente.isSelected() == true) {
+        clientes.setLltAtivo("S");
+    } else {
+        clientes.setLltAtivo("N");
+    }
+    return clientes;
+}
+
+public void beanView(LltCliente clientes) {
+    jTxtCodCliente.setText(Util.intToStr(clientes.getLltIdCliente()));
+    jTxtNomeCliente.setText(clientes.getLltNome());
+    jTxtEmailCliente.setText(clientes.getLltEmail());
+    jFmtDataNascimentoCliente.setText(Util.dateToStr(clientes.getLltDataNascimento()));
+    jFmtCpfCliente.setText(clientes.getLltCpf());
+    jFmtRgCliente.setText(clientes.getLltRg());
+    jCboSexoCliente.setSelectedItem(clientes.getLltSexo());
+    jTxtEnderecoCliente.setText(clientes.getLltEndereco());
+    jFmtCepCliente.setText(clientes.getLltCep());
+    jTxtBairroCliente.setText(clientes.getLltBairro());
+    jTxtCidadeCliente.setText(clientes.getLltCidade());
+    jFmtCelularCliente.setText(clientes.getLltCelular());
+    jFmtTelefoneCliente.setText(clientes.getLltTelefoneResidencial());
+    jTxtReferenciaCliente.setText(clientes.getLltReferencia());
+    if (clientes.getLltAtivo().equals("S") == true) {
+        jChbAtivoCliente.setSelected(true);
+    } else {
+        jChbAtivoCliente.setSelected(false);
+    }
+}
+
 
     
     
