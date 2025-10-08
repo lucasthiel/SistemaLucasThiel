@@ -5,6 +5,8 @@
 package view;
 
 import bean.LltCliente;
+import dao.ClientesDAO;
+import dao.UsuariosDAO;
 import tools.Util;
 
 
@@ -20,6 +22,7 @@ public class JDlgClientes extends javax.swing.JDialog {
      */
     
     boolean pesquisando = false;
+    private boolean incluir;
     
     public JDlgClientes(java.awt.Frame parent, boolean modal) {
     super(parent, modal);
@@ -460,6 +463,12 @@ public void beanView(LltCliente clientes) {
 
     private void jBtnConfirmarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarClienteActionPerformed
         // TODO add your handling code here:
+        ClientesDAO clientesDAO = new ClientesDAO();
+        if (incluir == true) {
+            clientesDAO.insert(viewBean());
+        } else {
+            clientesDAO.update(viewBean());
+        }
        Util.habilitar(false, jTxtCodCliente, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente, jBtnConfirmarCliente, jBtnCancelarCliente);
        Util.habilitar(true, jBtnIncluirCliente, jBtnAlterarCliente, jBtnExcluirCliente, jBtnPesquisarCliente);
        Util.limpar(jTxtCodCliente, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente);  
@@ -493,6 +502,8 @@ public void beanView(LltCliente clientes) {
         // TODO add your handling code here:
        Util.habilitar(true, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente, jBtnConfirmarCliente, jBtnCancelarCliente);
        Util.habilitar(false, jBtnIncluirCliente, jBtnAlterarCliente, jBtnExcluirCliente, jBtnPesquisarCliente);
+       jTxtNomeCliente.grabFocus();
+        incluir = false;
     }//GEN-LAST:event_jBtnAlterarClienteActionPerformed
 
     private void jBtnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarClienteActionPerformed

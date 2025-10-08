@@ -5,6 +5,7 @@
 package view;
 
 import bean.LltUsuario;
+import dao.UsuariosDAO;
 import tools.Util;
 
 
@@ -20,6 +21,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
      */
     
     boolean pesquisando = false;
+    private boolean incluir;
     
     public JDlgUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -570,9 +572,16 @@ public void beanView(LltUsuario usuarios) {
 
     private void jBtnConfirmarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarUsuActionPerformed
         // TODO add your handling code here:
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
+        if (incluir == true) {
+            usuariosDAO.insert(viewBean());
+        } else {
+            usuariosDAO.update(viewBean());
+        }
         Util.habilitar(false, jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu, jBtnConfirmarUsu, jBtnCancelarUsu);
         Util.habilitar(true, jBtnIncluirUsu, jBtnAlterarUsu, jBtnExcluirUsu, jBtnPesquisarUsu);
         Util.limpar(jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu);
+        
     }//GEN-LAST:event_jBtnConfirmarUsuActionPerformed
 
     private void jFmtDataNascimentoUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtDataNascimentoUsuActionPerformed

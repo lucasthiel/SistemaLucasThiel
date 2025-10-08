@@ -5,6 +5,8 @@
 package view;
 
 import bean.LltProduto;
+import dao.ProdutosDAO;
+import dao.UsuariosDAO;
 import tools.Util;
 
 
@@ -20,6 +22,7 @@ public class JDlgProdutos extends javax.swing.JDialog {
      */
     
     boolean pesquisando = false;
+    private boolean incluir;
     
     public JDlgProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -283,6 +286,12 @@ public void beanView(LltProduto produtos) {
 
     private void jBtnConfirmarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarProdutoActionPerformed
         // TODO add your handling code here:
+        ProdutosDAO produtosDAO = new ProdutosDAO();
+        if (incluir == true) {
+            produtosDAO.insert(viewBean());
+        } else {
+            produtosDAO.update(viewBean());
+        }
         Util.habilitar(false, jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
         Util.habilitar(true, jBtnIncluirProduto, jBtnAlterarProduto, jBtnExcluirProduto, jBtnPesquisarProduto);
         Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  

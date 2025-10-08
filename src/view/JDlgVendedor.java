@@ -4,6 +4,9 @@
  */
 package view;
 
+import bean.LltVendedor;
+import dao.UsuariosDAO;
+import dao.VendedorDAO;
 import tools.Util;
 
 
@@ -18,6 +21,7 @@ public class JDlgVendedor extends javax.swing.JDialog {
      */
     
     boolean pesquisando = false;
+    private boolean incluir;
     
     public JDlgVendedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -28,7 +32,30 @@ public class JDlgVendedor extends javax.swing.JDialog {
         Util.habilitar(false, jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor, jBtnConfirmarVendedor, jBtnCancelarVendedor);        
     }
     
+    public LltVendedor viewBean() {
+    LltVendedor vendedores = new LltVendedor();
+    int codigo = Util.strToInt(jTxtCodVendedor.getText());
+    vendedores.setLltIdVendedor(codigo);
+    vendedores.setLltNome(jTxtNomeVendedor.getText());
+    vendedores.setLltEmail(jTxtEmailVendedor.getText());
+    vendedores.setLltCpf(jFmtCpfVendedor.getText());
+    vendedores.setLltSexo(jCboSexoVendedor.getSelectedItem().toString());
+    vendedores.setLltCelular(jFmtCelularVendedor.getText());
+    vendedores.setLltCidade(jTxtCidadeVendedor.getText());
+    return vendedores;
+}
 
+public void beanView(LltVendedor vendedores) {
+    jTxtCodVendedor.setText(Util.intToStr(vendedores.getLltIdVendedor()));
+    jTxtNomeVendedor.setText(vendedores.getLltNome());
+    jTxtEmailVendedor.setText(vendedores.getLltEmail());
+    jFmtCpfVendedor.setText(vendedores.getLltCpf());
+    jCboSexoVendedor.setSelectedItem(vendedores.getLltSexo());
+    jFmtCelularVendedor.setText(vendedores.getLltCelular());
+    jTxtCidadeVendedor.setText(vendedores.getLltCidade());
+}
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -255,6 +282,12 @@ public class JDlgVendedor extends javax.swing.JDialog {
 
     private void jBtnConfirmarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarVendedorActionPerformed
         // TODO add your handling code here:
+        VendedorDAO vendedorDAO = new VendedorDAO();
+        if (incluir == true) {
+            vendedorDAO.insert(viewBean());
+        } else {
+            vendedorDAO.update(viewBean());
+        }
         Util.habilitar(false, jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor, jBtnConfirmarVendedor, jBtnCancelarVendedor);
         Util.habilitar(true, jBtnIncluirVendedor, jBtnAlterarVendedor, jBtnExcluirVendedor, jBtnPesquisarVendedor);
         Util.limpar(jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor);
@@ -274,6 +307,8 @@ public class JDlgVendedor extends javax.swing.JDialog {
         // TODO add your handling code here:
         Util.habilitar(true, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor, jBtnConfirmarVendedor, jBtnCancelarVendedor);
         Util.habilitar(false, jBtnIncluirVendedor, jBtnAlterarVendedor, jBtnExcluirVendedor, jBtnPesquisarVendedor);
+        jTxtNomeVendedor.grabFocus();
+        incluir = false;
     }//GEN-LAST:event_jBtnAlterarVendedorActionPerformed
 
     private void jBtnPesquisarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarVendedorActionPerformed
