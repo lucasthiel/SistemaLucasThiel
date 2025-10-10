@@ -102,6 +102,7 @@ public class LltProduto  implements java.io.Serializable {
 
     
     @Column(name="llt_preco", nullable=false, precision=10)
+
     public double getLltPreco() {
         return this.lltPreco;
     }
@@ -109,6 +110,7 @@ public class LltProduto  implements java.io.Serializable {
     public void setLltPreco(double lltPreco) {
         this.lltPreco = lltPreco;
     }
+
 
 
 

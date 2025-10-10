@@ -4,6 +4,8 @@
  */
 package view;
 
+import bean.LltVendedor;
+import dao.VendedorDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -17,13 +19,18 @@ public class JDlgVendedorPesquisar extends javax.swing.JDialog {
      * Creates new form JDlgVendedorPesquisar
      */
     JDlgVendedor jDlgVendedor;
+    ControllerVendedor controllerVendedor;
     
     public JDlgVendedorPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisando Vendedores");
-
+        VendedorDAO vendedorDao = new VendedorDAO();
+        List lista = (List) vendedorDao.listAll();
+        controllerVendedor = new ControllerVendedor();
+        controllerVendedor.setLista(lista);
+        jTable1.setModel(controllerVendedor);
     }
     
     public void setTelaPai(JDlgVendedor jDlgVendedor){

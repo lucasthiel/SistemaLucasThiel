@@ -54,7 +54,7 @@ public void beanView(LltProduto produtos) {
     jCboCategoriaProduto.setSelectedItem(produtos.getLltCategoria());
     jCboTamanhoProduto.setSelectedItem(produtos.getLltTamanho());
     jCboCorProduto.setSelectedItem(produtos.getLltCor());
-    jTxtPrecoProduto.setText(Util.doubleToStr(produtos.getLltPreco()));
+    jTxtPrecoProduto.setText(produtos.getLltPreco());
 }
 
     
@@ -93,6 +93,12 @@ public void beanView(LltProduto produtos) {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLblCodProduto.setText("Código do Produto:");
+
+        jTxtCodProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtCodProdutoActionPerformed(evt);
+            }
+        });
 
         jLblNomeProduto.setText("Produto:");
 
@@ -318,11 +324,17 @@ public void beanView(LltProduto produtos) {
         // TODO add your handling code here:
         Util.habilitar(true, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
         Util.habilitar(false, jBtnIncluirProduto, jBtnAlterarProduto, jBtnExcluirProduto, jBtnPesquisarProduto);
+        jTxtNomeProduto.grabFocus();
+        incluir = false;
     }//GEN-LAST:event_jBtnAlterarProdutoActionPerformed
 
     private void jTxtPrecoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtPrecoProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtPrecoProdutoActionPerformed
+
+    private void jTxtCodProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtCodProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtCodProdutoActionPerformed
 
     /**
      * @param args the command line arguments

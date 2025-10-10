@@ -4,6 +4,9 @@
  */
 package view;
 
+import bean.LltUsuario;
+import dao.UsuariosDAO;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,6 +17,7 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
 
     
     JDlgUsuarios jDlgUsuarios;
+    ControllerUsuarios controllerUsuarios;
 
     /**
      * Creates new form JDlgUsuariosPesquisar
@@ -23,6 +27,11 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisando Usuários");
+        UsuariosDAO usuariosDao = new UsuariosDAO();
+        List lista = (List) usuariosDao.listAll();
+        controllerUsuarios = new ControllerUsuarios();
+        controllerUsuarios.setLista(lista);
+        jTable1.setModel(controllerUsuarios);
     }
     
     public void setTelaPai(JDlgUsuarios jDlgUsuarios){

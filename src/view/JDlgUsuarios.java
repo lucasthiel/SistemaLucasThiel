@@ -538,6 +538,8 @@ public void beanView(LltUsuario usuarios) {
         // TODO add your handling code here:
         Util.habilitar(true, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu, jBtnConfirmarUsu, jBtnCancelarUsu);
         Util.habilitar(false, jBtnIncluirUsu, jBtnAlterarUsu, jBtnExcluirUsu, jBtnPesquisarUsu);
+        jTxtNome.grabFocus();
+        incluir = false;
     }//GEN-LAST:event_jBtnAlterarUsuActionPerformed
 
     private void jCboNivelUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboNivelUsuActionPerformed

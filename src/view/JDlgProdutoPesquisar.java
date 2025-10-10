@@ -4,7 +4,8 @@
  */
 package view;
 
-
+import bean.LltProduto;
+import dao.ProdutosDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -18,12 +19,18 @@ public class JDlgProdutoPesquisar extends javax.swing.JDialog {
      * Creates new form JDlgProdutoPesquisar
      */
     JDlgProdutos jDlgProdutos;
+    ControllerProdutos controllerProdutos;
     
     public JDlgProdutoPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisando Produtos");
+        ProdutosDAO produtosDao = new ProdutosDAO();
+        List lista = (List) produtosDao.listAll();
+        controllerProdutos = new ControllerProdutos();
+        controllerProdutos.setLista(lista);
+        jTable1.setModel(controllerProdutos);
     }
 
     

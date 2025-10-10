@@ -4,6 +4,8 @@
  */
 package view;
 
+import bean.LltCliente;
+import dao.ClientesDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -16,6 +18,7 @@ public class JDlgClientePesquisar extends javax.swing.JDialog {
     
     
     JDlgClientes jDlgClientes;
+    ControllerClientes controllerClientes;
     /**
      * Creates new form JDlgClientesPesquisar
      */
@@ -24,6 +27,11 @@ public class JDlgClientePesquisar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisando Clientess");
+        ClientesDAO clientesDao = new ClientesDAO();
+        List lista = (List) clientesDao.listAll();
+        controllerClientes = new ControllerClientes();
+        controllerClientes.setLista(lista);
+        jTable1.setModel(controllerClientes);
     }
     public void setTelaPai(JDlgClientes jDlgClientes){
         this.jDlgClientes = jDlgClientes;
