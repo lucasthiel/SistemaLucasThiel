@@ -10,6 +10,7 @@ import bean.LltCliente;
 import bean.LltCliente;
 import bean.LltVenda;
 import bean.LltVendedor;
+import dao.VendaDAO;
 import dao.VendedorDAO;
 import tools.Util;
 import java.util.List;
@@ -23,6 +24,10 @@ public class JDlgVenda extends javax.swing.JDialog {
     /**
      * Creates new form JDlgPedidos
      */
+    
+    boolean pesquisando = false;
+    private boolean incluir;
+    
     public JDlgVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -299,58 +304,50 @@ public class JDlgVenda extends javax.swing.JDialog {
                 jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jTxtTotal);
-//        jTxtCodigo.grabFocus();
-//        incluir = true;
+        jTxtCodigo.grabFocus();
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-//        Util.habilitar(true, jTxtNome, jTxtApelido,
-//            jFmtCpf, jFmtDataDeNascimento, jPwfSenha,
-//            jCboNivel, jChbAtivo, jBtnConfirmar, jBtnCancelar);
-//        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-//        jTxtNome.grabFocus();
-//        incluir = false;
+        Util.habilitar(true, jFmtData, jCboClientes, jCboVendedor, jTxtTotal, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        jFmtData.grabFocus();
+        incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-//        if (Util.perguntar("Deseja Excluir?") == true) {
-//            UsuariosDAO usuariosDAO = new UsuariosDAO();
-//            usuariosDAO.delete(viewBean());
-//        }
-//        Util.limpar(jTxtCodigo, jTxtNome, jTxtApelido,
-//            jFmtCpf, jFmtDataDeNascimento, jPwfSenha,
-//            jCboNivel, jChbAtivo);
+        if (Util.perguntar("Deseja Excluir?") == true) {
+            VendaDAO vendaDAO = new VendaDAO();
+            vendaDAO.delete(viewBean());
+        }
+        Util.limpar(jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jTxtTotal);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-//        UsuariosDAO usuariosDAO = new UsuariosDAO();
-//        if (incluir == true) {
-//            usuariosDAO.insert(viewBean());
-//        } else {
-//            usuariosDAO.update(viewBean());
-//        }
-//        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtApelido,
-//            jFmtCpf, jFmtDataDeNascimento, jPwfSenha,
-//            jCboNivel, jChbAtivo, jBtnConfirmar, jBtnCancelar);
-//        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        VendaDAO vendaDAO = new VendaDAO();
+        if (incluir == true) {
+            vendaDAO.insert(viewBean());
+        } else {
+            vendaDAO.update(viewBean());
+        }
+        Util.habilitar(false, jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jTxtTotal, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-//        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtApelido,
-//            jFmtCpf, jFmtDataDeNascimento, jPwfSenha,
-//            jCboNivel, jChbAtivo, jBtnConfirmar, jBtnCancelar);
-//        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.habilitar(false, jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jTxtTotal, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-//        JDlgUsuariosPesquisar jDlgUsuariosPesquisar = new JDlgUsuariosPesquisar(null, true);
-//        jDlgUsuariosPesquisar.setTelaAnterior(this);
-//        jDlgUsuariosPesquisar.setVisible(true);
+        JDlgVendaPesquisar JDlgVendaPesquisar = new JDlgVendaPesquisar(null, true);
+        JDlgVendaPesquisar.setTelaPai(this);
+        JDlgVendaPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed

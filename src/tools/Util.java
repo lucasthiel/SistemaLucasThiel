@@ -72,7 +72,7 @@ public class Util {
         }
     }
 
-    public static String doubleToStr(String num) {
+    public static String doubleToStr(double num) {
         return String.valueOf(num);
     }
 

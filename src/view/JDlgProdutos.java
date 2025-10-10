@@ -54,7 +54,7 @@ public void beanView(LltProduto produtos) {
     jCboCategoriaProduto.setSelectedItem(produtos.getLltCategoria());
     jCboTamanhoProduto.setSelectedItem(produtos.getLltTamanho());
     jCboCorProduto.setSelectedItem(produtos.getLltCor());
-    jTxtPrecoProduto.setText(produtos.getLltPreco());
+    jTxtPrecoProduto.setText(Util.doubleToStr(produtos.getLltPreco()));
 }
 
     
