@@ -5,6 +5,7 @@
 package view;
 
 
+import bean.LltUsuario;
 import bean.LltVenda;
 import dao.VendaDAO;
 import java.util.List;

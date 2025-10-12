@@ -5,6 +5,7 @@
 package view;
 
 import bean.LltProduto;
+import bean.LltVenda;
 import dao.ProdutosDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -96,7 +97,15 @@ public class JDlgProdutoPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
 
+        int linSel = jTable1.getSelectedRow();
+
+    if (linSel >= 0) {
+        LltProduto produto = (LltProduto) controllerProdutos.getBean(linSel);
+        jDlgProdutos.beanView(produto);
         setVisible(false);
+    } else {
+        JOptionPane.showMessageDialog(this, "Selecione uma linha da tabela antes de continuar.");
+    }
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**

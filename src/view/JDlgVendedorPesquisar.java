@@ -4,6 +4,7 @@
  */
 package view;
 
+import bean.LltVenda;
 import bean.LltVendedor;
 import dao.VendedorDAO;
 import java.util.List;
@@ -97,7 +98,15 @@ public class JDlgVendedorPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
 
+        int linSel = jTable1.getSelectedRow();
+
+    if (linSel >= 0) {
+        LltVendedor vendedor = (LltVendedor) controllerVendedor.getBean(linSel);
+        jDlgVendedor.beanView(vendedor);
         setVisible(false);
+    } else {
+        JOptionPane.showMessageDialog(this, "Selecione uma linha da tabela antes de continuar.");
+    }
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**

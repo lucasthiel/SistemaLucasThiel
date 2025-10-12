@@ -7,6 +7,11 @@ package view;
 import bean.LltCliente;
 import dao.ClientesDAO;
 import tools.Util;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import javax.swing.JOptionPane;
 
 
 
@@ -22,12 +27,41 @@ public class JDlgClientes extends javax.swing.JDialog {
     
     boolean pesquisando = false;
     private boolean incluir;
+    private boolean validarData() {
+        String dataStr = jFmtDataNascimentoCliente.getText().trim();
+
+        if (dataStr.equals("  /  /    ")) {
+            return true; // Campo vazio é permitido
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
+
+        try {
+            LocalDate.parse(dataStr, formatter);
+            return true; // Data válida
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Data inválida: \"" + dataStr + "\"\nPor favor, insira uma data real no formato dd/MM/aaaa.",
+                    "Erro de Data", JOptionPane.ERROR_MESSAGE);
+            jFmtDataNascimentoCliente.requestFocus(); // >>>> Mantém o foco no campo até corrigir
+            jFmtDataNascimentoCliente.selectAll();    // >>>> Seleciona o texto para facilitar a correção
+            return false;
+        }
+    }
     
     public JDlgClientes(java.awt.Frame parent, boolean modal) {
     super(parent, modal);
     initComponents();
     setTitle("Cadastro de Clientes");
     setLocationRelativeTo(null);
+    
+    jFmtDataNascimentoCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                validarData();
+            }
+        });
 
     Util.habilitar(
         false, 
@@ -72,6 +106,10 @@ public class JDlgClientes extends javax.swing.JDialog {
     } else {
         clientes.setLltAtivo("N");
     }
+    if (!jFmtDataNascimentoCliente.getText().trim().equals("  /  /    ")) {
+            clientes.setLltDataNascimento(Util.strToDate(jFmtDataNascimentoCliente.getText()));
+        }
+    
     return clientes;
 }
 
@@ -463,6 +501,9 @@ public void beanView(LltCliente clientes) {
 
     private void jBtnConfirmarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarClienteActionPerformed
         // TODO add your handling code here:
+        if (!validarData()) {
+            return; // Se for inválida, interrompe a ação
+        }
         ClientesDAO clientesDAO = new ClientesDAO();
         if (incluir == true) {
             clientesDAO.insert(viewBean());

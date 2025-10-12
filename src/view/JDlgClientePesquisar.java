@@ -5,6 +5,8 @@
 package view;
 
 import bean.LltCliente;
+import bean.LltUsuario;
+import bean.LltVenda;
 import dao.ClientesDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -96,7 +98,15 @@ public class JDlgClientePesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
 
+        int linSel = jTable1.getSelectedRow();
+
+    if (linSel >= 0) {
+        LltCliente cliente = (LltCliente) controllerClientes.getBean(linSel);
+        jDlgClientes.beanView(cliente);
         setVisible(false);
+    } else {
+        JOptionPane.showMessageDialog(this, "Selecione uma linha da tabela antes de continuar.");
+    }
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**

@@ -13,6 +13,11 @@ import dao.VendaDAO;
 import dao.VendedorDAO;
 import tools.Util;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,11 +31,40 @@ public class JDlgVenda extends javax.swing.JDialog {
     
     boolean pesquisando = false;
     private boolean incluir;
+    private boolean validarData() {
+        String dataStr = jFmtDataNasc.getText().trim();
+
+        if (dataStr.equals("  /  /    ")) {
+            return true; // Campo vazio é permitido
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
+
+        try {
+            LocalDate.parse(dataStr, formatter);
+            return true; // Data válida
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Data inválida: \"" + dataStr + "\"\nPor favor, insira uma data real no formato dd/MM/aaaa.",
+                    "Erro de Data", JOptionPane.ERROR_MESSAGE);
+            jFmtDataNasc.requestFocus(); // >>>> Mantém o foco no campo até corrigir
+            jFmtDataNasc.selectAll();    // >>>> Seleciona o texto para facilitar a correção
+            return false;
+        }
+    }
     
     public JDlgVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        jFmtDataNasc.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                validarData();
+            }
+        });
+        
         Util.habilitar(false, jTxtCodigo, jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal,
                 jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
@@ -59,7 +93,10 @@ public class JDlgVenda extends javax.swing.JDialog {
         venda.setLltFormaPagamento("Crédito");
         venda.setLltModoEnvio("Correios");
 
-
+        if (!jFmtDataNasc.getText().trim().equals("  /  /    ")) {
+            venda.setLltDataVenda(Util.strToDate(jFmtDataNasc.getText()));
+        }
+        
         return venda;
     }
     
@@ -335,6 +372,9 @@ public class JDlgVenda extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
+        if (!validarData()) {
+            return; // Se for inválida, interrompe a ação
+        }
         VendaDAO vendaDAO = new VendaDAO();
         if (incluir == true) {
             vendaDAO.insert(viewBean());
@@ -343,6 +383,7 @@ public class JDlgVenda extends javax.swing.JDialog {
         }
         Util.habilitar(false, jTxtCodigo, jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -356,6 +397,7 @@ public class JDlgVenda extends javax.swing.JDialog {
         JDlgVendaPesquisar JDlgVendaPesquisar = new JDlgVendaPesquisar(null, true);
         JDlgVendaPesquisar.setTelaPai(this);
         JDlgVendaPesquisar.setVisible(true);
+        pesquisando = true;
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed

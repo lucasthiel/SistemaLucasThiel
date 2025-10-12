@@ -99,7 +99,15 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
+        int linSel = jTable1.getSelectedRow();
+
+    if (linSel >= 0) {
+        LltUsuario usuario = (LltUsuario) controllerUsuarios.getBean(linSel);
+        jDlgUsuarios.beanView(usuario);
         setVisible(false);
+    } else {
+        JOptionPane.showMessageDialog(this, "Selecione uma linha da tabela antes de continuar.");
+    }
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**

@@ -7,6 +7,12 @@ package view;
 import bean.LltUsuario;
 import dao.UsuariosDAO;
 import tools.Util;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import javax.swing.JOptionPane;
+
 
 
 
@@ -22,12 +28,42 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     
     boolean pesquisando = false;
     private boolean incluir;
+    private boolean validarData() {
+        String dataStr = jFmtDataNascimentoUsu.getText().trim();
+
+        if (dataStr.equals("  /  /    ")) {
+            return true; // Campo vazio é permitido
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
+
+        try {
+            LocalDate.parse(dataStr, formatter);
+            return true; // Data válida
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Data inválida: \"" + dataStr + "\"\nPor favor, insira uma data real no formato dd/MM/aaaa.",
+                    "Erro de Data", JOptionPane.ERROR_MESSAGE);
+            jFmtDataNascimentoUsu.requestFocus(); // >>>> Mantém o foco no campo até corrigir
+            jFmtDataNascimentoUsu.selectAll();    // >>>> Seleciona o texto para facilitar a correção
+            return false;
+        }
+    }
     
     public JDlgUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Cadastro do Usuário");
         setLocationRelativeTo(null);
+        
+        jFmtDataNascimentoUsu.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                validarData();
+            }
+        });
+    
         
         Util.habilitar(false, jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu, jBtnConfirmarUsu, jBtnCancelarUsu);
     }
@@ -48,6 +84,11 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     } else {
         usuarios.setLltAtivo("N");
     }
+    
+    if (!jFmtDataNascimentoUsu.getText().trim().equals("  /  /    ")) {
+            usuarios.setLltDataNascimento(Util.strToDate(jFmtDataNascimentoUsu.getText()));
+        }
+    
     return usuarios;
 }
 
@@ -532,7 +573,7 @@ public void beanView(LltUsuario usuarios) {
         Util.habilitar(true, jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu, jBtnConfirmarUsu, jBtnCancelarUsu);
         Util.habilitar(false, jBtnIncluirUsu, jBtnAlterarUsu, jBtnExcluirUsu, jBtnPesquisarUsu);
         Util.limpar(jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu);
-        jTxtCodigo.grabFocus();
+        jTxtCodUsu.grabFocus();
         incluir = true;
     }//GEN-LAST:event_jBtnIncluirUsuActionPerformed
 
@@ -540,7 +581,7 @@ public void beanView(LltUsuario usuarios) {
         // TODO add your handling code here:
         Util.habilitar(true, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu, jBtnConfirmarUsu, jBtnCancelarUsu);
         Util.habilitar(false, jBtnIncluirUsu, jBtnAlterarUsu, jBtnExcluirUsu, jBtnPesquisarUsu);
-        jTxtNome.grabFocus();
+        jTxtNomeUsu.grabFocus();
         incluir = false;
     }//GEN-LAST:event_jBtnAlterarUsuActionPerformed
 
@@ -567,7 +608,7 @@ public void beanView(LltUsuario usuarios) {
 
     private void jBtnPesquisarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarUsuActionPerformed
         // TODO add your handling code here:
-        //pesquisa = true;
+        //pesquisando = true;
         JDlgUsuariosPesquisar jDlgUsuariosPesquisar = new JDlgUsuariosPesquisar(null, true);
         jDlgUsuariosPesquisar.setTelaPai(this);
         jDlgUsuariosPesquisar.setVisible(true);
@@ -576,6 +617,9 @@ public void beanView(LltUsuario usuarios) {
 
     private void jBtnConfirmarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarUsuActionPerformed
         // TODO add your handling code here:
+        if (!validarData()) {
+            return; // Se for inválida, interrompe a ação
+        }
         UsuariosDAO usuariosDAO = new UsuariosDAO();
         if (incluir == true) {
             usuariosDAO.insert(viewBean());
@@ -584,7 +628,7 @@ public void beanView(LltUsuario usuarios) {
         }
         Util.habilitar(false, jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu, jBtnConfirmarUsu, jBtnCancelarUsu);
         Util.habilitar(true, jBtnIncluirUsu, jBtnAlterarUsu, jBtnExcluirUsu, jBtnPesquisarUsu);
-        Util.limpar(jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu);
+    Util.limpar(jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu);
         
     }//GEN-LAST:event_jBtnConfirmarUsuActionPerformed
 
