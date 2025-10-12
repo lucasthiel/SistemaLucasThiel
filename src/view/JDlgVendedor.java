@@ -5,7 +5,6 @@
 package view;
 
 import bean.LltVendedor;
-import dao.UsuariosDAO;
 import dao.VendedorDAO;
 import tools.Util;
 
@@ -271,6 +270,8 @@ public void beanView(LltVendedor vendedores) {
         Util.habilitar(true, jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor, jBtnConfirmarVendedor, jBtnCancelarVendedor);
         Util.habilitar(false, jBtnIncluirVendedor, jBtnAlterarVendedor, jBtnExcluirVendedor, jBtnPesquisarVendedor);
         Util.limpar(jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor);
+        jTxtCodVendedor.grabFocus();
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluirVendedorActionPerformed
 
     private void jBtnCancelarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarVendedorActionPerformed

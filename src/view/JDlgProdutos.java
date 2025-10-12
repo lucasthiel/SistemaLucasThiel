@@ -287,7 +287,9 @@ public void beanView(LltProduto produtos) {
         // TODO add your handling code here:
         Util.habilitar(true, jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
         Util.habilitar(false, jBtnIncluirProduto, jBtnAlterarProduto, jBtnExcluirProduto, jBtnPesquisarProduto);
-        Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
+        Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
+        jTxtCodProduto.grabFocus();
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluirProdutoActionPerformed
 
     private void jBtnConfirmarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarProdutoActionPerformed

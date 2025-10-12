@@ -39,7 +39,7 @@ public class LltVendaProduto  implements java.io.Serializable {
        this.lltTipoEmbalagem = lltTipoEmbalagem;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
+     @Id 
 
     
     @Column(name="llt_idVendaProduto", unique=true, nullable=false)

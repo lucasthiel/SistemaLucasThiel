@@ -43,7 +43,7 @@ public class LltUsuario  implements java.io.Serializable {
        this.lltAtivo = lltAtivo;
     }
    
-     @Id 
+     @Id
 
     
     @Column(name="llt_idUsuario", unique=true, nullable=false)

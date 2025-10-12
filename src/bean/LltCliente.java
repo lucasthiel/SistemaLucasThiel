@@ -70,7 +70,8 @@ public class LltCliente  implements java.io.Serializable {
        this.lltAtivo = lltAtivo;
     }
    
-     @Id 
+     @Id
+     
 
     
     @Column(name="llt_idCliente", unique=true, nullable=false)

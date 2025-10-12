@@ -38,7 +38,7 @@ public class LltProduto  implements java.io.Serializable {
        this.lltPreco = lltPreco;
     }
    
-     @Id 
+     @Id
 
     
     @Column(name="llt_idProduto", unique=true, nullable=false)

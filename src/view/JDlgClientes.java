@@ -6,7 +6,6 @@ package view;
 
 import bean.LltCliente;
 import dao.ClientesDAO;
-import dao.UsuariosDAO;
 import tools.Util;
 
 
@@ -458,7 +457,8 @@ public void beanView(LltCliente clientes) {
        Util.habilitar(true, jTxtCodCliente, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente, jBtnConfirmarCliente, jBtnCancelarCliente);
        Util.habilitar(false, jBtnIncluirCliente, jBtnAlterarCliente, jBtnExcluirCliente, jBtnPesquisarCliente);
        Util.limpar(jTxtCodCliente, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente);  
-
+       jTxtCodCliente.grabFocus();
+       incluir = true;
     }//GEN-LAST:event_jBtnIncluirClienteActionPerformed
 
     private void jBtnConfirmarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarClienteActionPerformed

@@ -532,6 +532,8 @@ public void beanView(LltUsuario usuarios) {
         Util.habilitar(true, jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu, jBtnConfirmarUsu, jBtnCancelarUsu);
         Util.habilitar(false, jBtnIncluirUsu, jBtnAlterarUsu, jBtnExcluirUsu, jBtnPesquisarUsu);
         Util.limpar(jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu);
+        jTxtCodigo.grabFocus();
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluirUsuActionPerformed
 
     private void jBtnAlterarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarUsuActionPerformed
@@ -555,12 +557,12 @@ public void beanView(LltUsuario usuarios) {
 
     private void jBtnExcluirUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirUsuActionPerformed
         // TODO add your handling code here:
-        if (pesquisando == false) {
-            Util.mensagem("Você precisa pesquisar um usuário primeiro");
-        } else {
-                Util.perguntar("Você deseja excluir?");
-                Util.limpar(jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu);  
+        if (Util.perguntar("Deseja Excluir?") == true) {
+            UsuariosDAO usuariosDAO = new UsuariosDAO();
+            usuariosDAO.delete(viewBean());
         }
+            Util.limpar(jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu);  
+        
     }//GEN-LAST:event_jBtnExcluirUsuActionPerformed
 
     private void jBtnPesquisarUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarUsuActionPerformed
