@@ -31,7 +31,7 @@ public class JDlgClientes extends javax.swing.JDialog {
         String dataStr = jFmtDataNascimentoCliente.getText().trim();
 
         if (dataStr.equals("  /  /    ")) {
-            return true; // Campo vazio é permitido
+            return true; 
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
@@ -39,13 +39,13 @@ public class JDlgClientes extends javax.swing.JDialog {
 
         try {
             LocalDate.parse(dataStr, formatter);
-            return true; // Data válida
+            return true; 
         } catch (DateTimeParseException e) {
             JOptionPane.showMessageDialog(this,
                     "Data inválida: \"" + dataStr + "\"\nPor favor, insira uma data real no formato dd/MM/aaaa.",
                     "Erro de Data", JOptionPane.ERROR_MESSAGE);
-            jFmtDataNascimentoCliente.requestFocus(); // >>>> Mantém o foco no campo até corrigir
-            jFmtDataNascimentoCliente.selectAll();    // >>>> Seleciona o texto para facilitar a correção
+            jFmtDataNascimentoCliente.requestFocus(); 
+            jFmtDataNascimentoCliente.selectAll();    
             return false;
         }
     }

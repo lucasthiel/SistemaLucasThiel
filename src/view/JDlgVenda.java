@@ -101,8 +101,11 @@ public class JDlgVenda extends javax.swing.JDialog {
     }
     
     public void beanView(LltVenda venda) {
+        jTxtCodigo.setText(Util.intToStr(venda.getLltIdCliente()));
+        jFmtDataNasc.setText(Util.dateToStr(venda.getLltDataVenda()));
         jCboClientes.setSelectedItem(venda.getLltIdCliente());
         jCboVendedor.setSelectedItem(venda.getLltIdVendedor());
+        jTxtTotal.setText(Util.doubleToStr(venda.getLltValorVenda()));
     }
 
     /**
