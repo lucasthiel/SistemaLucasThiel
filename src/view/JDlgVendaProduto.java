@@ -13,6 +13,8 @@ import bean.LltProduto;
  */
 public class JDlgVendaProduto extends javax.swing.JDialog {
 
+    JDlgVenda jDlgVenda;    
+    
     /**
      * Creates new form JDlgPedidosProdutos
      */
@@ -20,6 +22,10 @@ public class JDlgVendaProduto extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+    }
+    
+    public void setTelaAnterior(JDlgVenda jDlgVenda){
+        this.jDlgVenda = jDlgVenda;
     }
 
     /**

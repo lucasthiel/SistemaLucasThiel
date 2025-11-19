@@ -25,6 +25,16 @@ public class ControllerVendasProdutos extends AbstractTableModel{
        return lista.get(rowIndex);    
     }
     
+    public void addBean(LltVendaProduto vendasProdutos){
+        this.lista.add(vendasProdutos);
+        this.fireTableDataChanged();
+    }
+    
+    public void removeBean(int rowIndex) {
+        this.lista.remove(rowIndex); 
+        this.fireTableDataChanged();
+    }
+    
     @Override
     public int getRowCount() {
         if (lista == null) {

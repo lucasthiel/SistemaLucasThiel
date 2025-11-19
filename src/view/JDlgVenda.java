@@ -25,6 +25,8 @@ import javax.swing.JOptionPane;
  */
 public class JDlgVenda extends javax.swing.JDialog {
 
+    ControllerVendasProdutos controllerVendasProdutos;
+    
     /**
      * Creates new form JDlgPedidos
      */
@@ -128,7 +130,7 @@ public class JDlgVenda extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jTxtTotal = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jBtnIncluir = new javax.swing.JButton();
         jBtnAlterar = new javax.swing.JButton();
         jBtnExcluir = new javax.swing.JButton();
@@ -157,7 +159,7 @@ public class JDlgVenda extends javax.swing.JDialog {
 
         jLabel5.setText("Total");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -168,7 +170,7 @@ public class JDlgVenda extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTable1);
 
         jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/incluir.png"))); // NOI18N
         jBtnIncluir.setText("Incluir");
@@ -405,8 +407,9 @@ public class JDlgVenda extends javax.swing.JDialog {
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
         // TODO add your handling code here:
-        if (Util.perguntar("Deseja excluir o produto ?") == true) {
-
+        if (Util.perguntar("Deseja excluir o produto ?")== true) {
+            int ind = jTable1.getSelectedRow();
+            controllerVendasProdutos.removeBean(ind);
         }
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
@@ -490,7 +493,7 @@ public class JDlgVenda extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTxtCodigo;
     private javax.swing.JTextField jTxtTotal;
     // End of variables declaration//GEN-END:variables
