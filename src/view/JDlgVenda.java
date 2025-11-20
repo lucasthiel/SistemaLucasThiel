@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -81,6 +82,10 @@ public class JDlgVenda extends javax.swing.JDialog {
         for (int i = 0; i < lista2.size(); i++) {
             jCboVendedor.addItem((LltVendedor) lista2.get(i));
         }
+        
+        controllerVendasProdutos = new ControllerVendasProdutos();
+        controllerVendasProdutos.setList(new ArrayList());
+        jTable1.setModel(controllerVendasProdutos);
     }
 
     public LltVenda viewBean() {
@@ -422,6 +427,7 @@ public class JDlgVenda extends javax.swing.JDialog {
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
         // TODO add your handling code here:
         JDlgVendaProduto jDlgVendaProduto = new JDlgVendaProduto(null, true);
+        jDlgVendaProduto.setTelaAnterior(this);
         jDlgVendaProduto.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
 

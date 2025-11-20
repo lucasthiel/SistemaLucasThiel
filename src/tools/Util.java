@@ -76,7 +76,7 @@ public class Util {
         return String.valueOf(num);
     }
 
-    public static Date strToDate(String data) {
+    public static Date strToDate(String data) { 
         SimpleDateFormat datando = new SimpleDateFormat("dd/MM/yyyy");
         datando.setLenient(false);
         try {

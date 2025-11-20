@@ -1,86 +1,72 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
- */
 package view;
 
 import bean.LltVendaProduto;
-
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-/**
- *
- * @author ACER
- */
-public class ControllerVendasProdutos extends AbstractTableModel{
+public class ControllerVendasProdutos extends AbstractTableModel {
 
-    private List lista;
+    private List lstVendasProdutos;
 
-    public void setList(List lista) {
-        this.lista = lista;
+    public void setList(List lstVendasProdutos) {
+        this.lstVendasProdutos = lstVendasProdutos;
     }
 
-    public Object getBean(int rowIndex) {
-       return lista.get(rowIndex);    
+    public LltVendaProduto getBean(int rowIndex) {
+        return (LltVendaProduto) lstVendasProdutos.get(rowIndex);
     }
-    
-    public void addBean(LltVendaProduto vendasProdutos){
-        this.lista.add(vendasProdutos);
+
+    public void addBean(LltVendaProduto vendasProdutos) {
+        this.lstVendasProdutos.add(vendasProdutos);
         this.fireTableDataChanged();
     }
-    
+
     public void removeBean(int rowIndex) {
-        this.lista.remove(rowIndex); 
+        this.lstVendasProdutos.remove(rowIndex);
         this.fireTableDataChanged();
     }
-    
+
     @Override
     public int getRowCount() {
-        if (lista == null) {
-        return 0; // ← mostra só as colunas, sem erro
-    }
-        return lista.size();
+        if (lstVendasProdutos == null) {
+            return 0;
+        }
+        return lstVendasProdutos.size();
     }
 
     @Override
     public int getColumnCount() {
         return 4;
     }
-    
-     @Override
+
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-         LltVendaProduto venda_Produto = (LltVendaProduto) lista.get(rowIndex);
+        LltVendaProduto vendaProduto = (LltVendaProduto) lstVendasProdutos.get(rowIndex);
+
         if (columnIndex == 0) {
-            return venda_Produto.getLltIdVendaProduto();
+            return vendaProduto.getProduto().getLltIdProduto();
+        } else if (columnIndex == 1) {
+            return vendaProduto.getProduto().getLltNomeProduto();
+        } else if (columnIndex == 2) {
+            return vendaProduto.getValorUnitario();
+        } else if (columnIndex == 3) {
+            return vendaProduto.getQuantidade() * vendaProduto.getValorUnitario();
         }
-        if (columnIndex == 1) {
-            return venda_Produto.getLltIdVenda();
-        }
-        if (columnIndex == 2) {
-            return venda_Produto.getLltIdProduto();
-        }
-        if (columnIndex == 3) {
-            return venda_Produto.getLltStatusVenda();
-        }
+
         return "";
     }
 
     @Override
-    public String getColumnName(int column) {
-        if (column == 0) {
+    public String getColumnName(int columnIndex) {
+        if (columnIndex == 0) {
             return "Código";
-        }
-        if (column == 1) {
+        } else if (columnIndex == 1) {
             return "Código da Venda";
-        }
-        if (column == 2) {
+        } else if (columnIndex == 2) {
             return "Código do Produto";
-        }
-        if (column == 3) {
+        } else if (columnIndex == 3) {
             return "Status Venda";
         }
         return "";
     }
 }
-    
