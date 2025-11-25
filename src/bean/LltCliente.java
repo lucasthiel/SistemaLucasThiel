@@ -222,10 +222,23 @@ public class LltCliente  implements java.io.Serializable {
     public void setLltAtivo(String lltAtivo) {
         this.lltAtivo = lltAtivo;
     }
+    
+    @Override
+    public String toString() {
+        return this.lltNome;
+    }
 
+    @Override
+    public boolean equals( Object object){
+        if(object instanceof LltCliente) {
+            LltCliente lltCliente = (LltCliente)object;
+            if(this.getLltIdCliente()== lltCliente.getLltIdCliente()){
+                return true;
+            }
+    }
 
-
-
+        return false;
+    }
 }
 
 

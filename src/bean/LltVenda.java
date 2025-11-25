@@ -5,7 +5,10 @@ package bean;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,6 +26,8 @@ public class LltVenda  implements java.io.Serializable {
      private int lltIdVenda;
      private int lltIdCliente;
      private int lltIdVendedor;
+     private LltCliente clientes;
+     private LltVendedor vendedor;
      private String lltFormaPagamento;
      private String lltModoEnvio;
      private Date lltDataVenda;
@@ -91,6 +96,27 @@ public class LltVenda  implements java.io.Serializable {
     
     public void setLltModoEnvio(String lltModoEnvio) {
         this.lltModoEnvio = lltModoEnvio;
+    }
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "llt_idCliente", insertable = false, updatable = false)
+public LltCliente getLltCliente() {
+    return this.clientes;
+}
+    
+    public void setLltCliente(LltCliente clientes) {
+        this.clientes = clientes;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "llt_idVendedor", insertable = false, updatable = false)
+public LltVendedor getLltVendedor() {
+    return this.vendedor;
+}
+
+    
+    public void setLltVendedor(LltVendedor vendedor) {
+        this.vendedor = vendedor;
     }
 
     @Temporal(TemporalType.DATE)

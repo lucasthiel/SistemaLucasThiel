@@ -42,9 +42,9 @@ Contributor(s):
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_lucas_thiel?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">lucas_thiel</property>
-    <property name="hibernate.connection.password">lucas_thiel</property>
+    <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/db_lucas_thiel?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password"></property>
     <mapping class="bean.LltVendaProduto"/>
     <mapping class="bean.LltVendedor"/>
     <mapping class="bean.LltCliente"/>

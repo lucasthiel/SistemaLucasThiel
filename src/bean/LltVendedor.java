@@ -109,8 +109,23 @@ public class LltVendedor  implements java.io.Serializable {
     public void setLltCidade(String lltCidade) {
         this.lltCidade = lltCidade;
     }
+    
+    @Override
+    public String toString() {
+        return this.lltNome;
+    }
 
+    @Override
+    public boolean equals( Object object){
+        if(object instanceof LltVendedor) {
+            LltVendedor lltVendedor = (LltVendedor)object;
+            if(this.getLltIdVendedor()== lltVendedor.getLltIdVendedor()){
+                return true;
+            }
+    }
 
+        return false;
+    }
 
 
 }

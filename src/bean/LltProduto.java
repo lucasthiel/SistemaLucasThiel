@@ -111,7 +111,22 @@ public class LltProduto  implements java.io.Serializable {
         this.lltPreco = lltPreco;
     }
 
+@Override
+    public String toString() {
+        return this.lltNomeProduto;
+    }
 
+    @Override
+    public boolean equals( Object object){
+        if(object instanceof LltProduto) {
+            LltProduto lltProduto = (LltProduto)object;
+            if(this.getLltIdProduto()== lltProduto.getLltIdProduto()){
+                return true;
+            }
+    }
+
+        return false;
+    }
 
 
 

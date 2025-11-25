@@ -61,11 +61,13 @@ public class ControllerVendasProdutos extends AbstractTableModel {
         if (columnIndex == 0) {
             return "Código";
         } else if (columnIndex == 1) {
-            return "Código da Venda";
+            return "Nome";
         } else if (columnIndex == 2) {
-            return "Código do Produto";
+            return "Quantidade";
         } else if (columnIndex == 3) {
-            return "Status Venda";
+            return "Valor Unitário";
+        } else if (columnIndex == 3) {
+            return "Total";
         }
         return "";
     }

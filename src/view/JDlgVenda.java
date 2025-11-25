@@ -108,11 +108,20 @@ public class JDlgVenda extends javax.swing.JDialog {
     }
     
     public void beanView(LltVenda venda) {
-        jTxtCodigo.setText(Util.intToStr(venda.getLltIdCliente()));
+        jTxtCodigo.setText(Util.intToStr(venda.getLltIdVenda()));
         jFmtDataNasc.setText(Util.dateToStr(venda.getLltDataVenda()));
-        jCboClientes.setSelectedItem(venda.getLltIdCliente());
-        jCboVendedor.setSelectedItem(venda.getLltIdVendedor());
+        jCboClientes.setSelectedItem(venda.getLltCliente());
+        jCboVendedor.setSelectedItem(venda.getLltVendedor());
         jTxtTotal.setText(Util.doubleToStr(venda.getLltValorVenda()));
+    }
+    
+    public void somaTotal() {
+        double total = 0;
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            Double valor = (Double) jTable1.getValueAt(i, 3);
+            total += valor;
+        }
+        jTxtTotal.setText(String.valueOf(total));
     }
 
     /**
@@ -163,6 +172,12 @@ public class JDlgVenda extends javax.swing.JDialog {
         jLabel4.setText("Vendedor");
 
         jLabel5.setText("Total");
+
+        jTxtTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtTotalActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -415,6 +430,7 @@ public class JDlgVenda extends javax.swing.JDialog {
         if (Util.perguntar("Deseja excluir o produto ?")== true) {
             int ind = jTable1.getSelectedRow();
             controllerVendasProdutos.removeBean(ind);
+            somaTotal();
         }
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
@@ -429,7 +445,13 @@ public class JDlgVenda extends javax.swing.JDialog {
         JDlgVendaProduto jDlgVendaProduto = new JDlgVendaProduto(null, true);
         jDlgVendaProduto.setTelaAnterior(this);
         jDlgVendaProduto.setVisible(true);
+        somaTotal();
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
+
+    private void jTxtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTotalActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTxtTotalActionPerformed
 
     /**
      * @param args the command line arguments

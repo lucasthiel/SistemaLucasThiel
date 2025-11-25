@@ -39,13 +39,13 @@ public class ControllerVendas extends AbstractTableModel{
             return venda.getLltIdVenda();
         }
         if (columnIndex == 1) {
-            return venda.getLltIdCliente();
+            return venda.getLltDataVenda();
         }
         if (columnIndex == 2) {
-            return venda.getLltIdVendedor();
+            return venda.getLltValorVenda();
         }
         if (columnIndex == 3) {
-            return venda.getLltValorVenda();
+            return venda.getLltCliente().getLltNome();
         }
         return "";
     }
