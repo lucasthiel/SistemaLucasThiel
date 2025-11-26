@@ -100,26 +100,21 @@ public class JDlgVendaPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-    int linSel = jTable1.getSelectedRow();
-
-    if (linSel >= 0) {
-        LltVenda venda = (LltVenda) controllerVendas.getBean(linSel);
-        jDlgVenda.beanView(venda);
-        setVisible(false);
-    } else {
-        JOptionPane.showMessageDialog(this, "Selecione uma linha da tabela antes de continuar.");
-    }
+        
+    if (jTable1.getSelectedRow() == -1){
+            Util.mensagem("Selecione uma liha");
+        } else {
+        LltVenda usuarios =  (LltVenda) controllerVendas.getBean( jTable1.getSelectedRow() );
+        jDlgVenda.beanView(usuarios);
+        this.setVisible(false);
+        }
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        if (jTable1.getSelectedRow() == -1){
-            Util.mensagem("Selecione uma linha");
-        } else {
-        LltVenda lltVenda =  (LltVenda) controllerVendas.getBean( jTable1.getSelectedRow() );
-        jDlgVenda.beanView(lltVenda);
-        this.setVisible(false);
-        }
+        if (evt.getClickCount() == 2){
+        jBtnOkActionPerformed(null);
+       }
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**

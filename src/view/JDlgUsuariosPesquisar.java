@@ -119,13 +119,9 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        if (jTable1.getSelectedRow() == -1){
-            Util.mensagem("Selecione uma linha");
-        } else {
-        LltUsuario lltUsuario =  (LltUsuario) controllerUsuarios.getBean( jTable1.getSelectedRow() );
-        jDlgUsuarios.beanView(lltUsuario);
-        this.setVisible(false);
-        }
+        if (evt.getClickCount() == 2){
+        jBtnOkActionPerformed(null);
+       }
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**

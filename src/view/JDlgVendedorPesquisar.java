@@ -118,13 +118,9 @@ public class JDlgVendedorPesquisar extends javax.swing.JDialog {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        if (jTable1.getSelectedRow() == -1){
-            Util.mensagem("Selecione uma linha");
-        } else {
-        LltVendedor lltVendedor =  (LltVendedor) controllerVendedor.getBean( jTable1.getSelectedRow() );
-        jDlgVendedor.beanView(lltVendedor);
-        this.setVisible(false);
-        }
+        if (evt.getClickCount() == 2){
+        jBtnOkActionPerformed(null);
+       }
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**

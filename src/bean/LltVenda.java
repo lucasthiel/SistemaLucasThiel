@@ -98,7 +98,7 @@ public class LltVenda  implements java.io.Serializable {
         this.lltModoEnvio = lltModoEnvio;
     }
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
 @JoinColumn(name = "llt_idCliente", insertable = false, updatable = false)
 public LltCliente getLltCliente() {
     return this.clientes;
@@ -108,7 +108,7 @@ public LltCliente getLltCliente() {
         this.clientes = clientes;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
 @JoinColumn(name = "llt_idVendedor", insertable = false, updatable = false)
 public LltVendedor getLltVendedor() {
     return this.vendedor;

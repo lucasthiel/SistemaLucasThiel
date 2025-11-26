@@ -8,8 +8,10 @@ package view;
 import dao.ClientesDAO;
 import bean.LltCliente;
 import bean.LltVenda;
+import bean.LltVendaProduto;
 import bean.LltVendedor;
 import dao.VendaDAO;
+import dao.VendaProdutoDAO;
 import dao.VendedorDAO;
 import tools.Util;
 import java.util.List;
@@ -51,8 +53,8 @@ public class JDlgVenda extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this,
                     "Data inválida: \"" + dataStr + "\"\nPor favor, insira uma data real no formato dd/MM/aaaa.",
                     "Erro de Data", JOptionPane.ERROR_MESSAGE);
-            jFmtDataNasc.requestFocus(); // >>>> Mantém o foco no campo até corrigir
-            jFmtDataNasc.selectAll();    // >>>> Seleciona o texto para facilitar a correção
+            jFmtDataNasc.requestFocus(); 
+            jFmtDataNasc.selectAll();    
             return false;
         }
     }
@@ -113,6 +115,9 @@ public class JDlgVenda extends javax.swing.JDialog {
         jCboClientes.setSelectedItem(venda.getLltCliente());
         jCboVendedor.setSelectedItem(venda.getLltVendedor());
         jTxtTotal.setText(Util.doubleToStr(venda.getLltValorVenda()));
+        VendaProdutoDAO vendaProdutoDAO = new VendaProdutoDAO();
+        List lista = (List) vendaProdutoDAO.listProdutos(venda);
+        controllerVendasProdutos.setList(lista);
     }
     
     public void somaTotal() {
@@ -240,7 +245,7 @@ public class JDlgVenda extends javax.swing.JDialog {
             }
         });
 
-        jBtnIncluirProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ok.png"))); // NOI18N
+        jBtnIncluirProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/incluir.png"))); // NOI18N
         jBtnIncluirProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnIncluirProdActionPerformed(evt);
@@ -370,12 +375,14 @@ public class JDlgVenda extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jTxtCodigo, jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal,
-                jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limpar(jTxtCodigo, jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal);
-        jTxtCodigo.grabFocus();
-        incluir = true;
+        Util.habilitar(true, jTxtCodigo, jTxtTotal, jCboClientes, jCboVendedor, jFmtDataNasc, jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd, jTable1);
+
+            Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+
+            Util.limpar(jTxtCodigo, jTxtTotal, jCboClientes, jCboVendedor, jFmtDataNasc);
+            jTxtCodigo.grabFocus();
+            
+            incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
@@ -388,17 +395,26 @@ public class JDlgVenda extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        if (Util.perguntar("Deseja Excluir?") == true) {
+        if (Util.perguntar("Deseja Excluir?")) {
             VendaDAO vendaDAO = new VendaDAO();
-            vendaDAO.delete(viewBean());
+            VendaProdutoDAO vendasProdutosDAO = new VendaProdutoDAO();
+            LltVenda venda = viewBean();
+            for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
+                LltVendaProduto vendaProduto = controllerVendasProdutos.getBean(ind);
+                vendasProdutosDAO.delete(vendaProduto);
+            }
+            vendaDAO.delete(venda);
         }
+
         Util.limpar(jTxtCodigo, jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal);
+        controllerVendasProdutos.setList(new ArrayList());
+        jTxtCodigo.grabFocus();
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
         if (!validarData()) {
-            return; // Se for inválida, interrompe a ação
+            return; 
         }
         VendaDAO vendaDAO = new VendaDAO();
         if (incluir == true) {
@@ -408,7 +424,7 @@ public class JDlgVenda extends javax.swing.JDialog {
         }
         Util.habilitar(false, jTxtCodigo, jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limpar(jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal);
+        Util.limpar(jTxtCodigo, jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal, jTable1);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -427,10 +443,12 @@ public class JDlgVenda extends javax.swing.JDialog {
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
         // TODO add your handling code here:
-        if (Util.perguntar("Deseja excluir o produto ?")== true) {
-            int ind = jTable1.getSelectedRow();
-            controllerVendasProdutos.removeBean(ind);
-            somaTotal();
+        if (jTable1.getSelectedRow() == -1) {
+            Util.mensagem("Você precisa selecionar uma linha!");
+        } else {
+            if (Util.perguntar("Deseja excluir o produto ?") == true) {
+                controllerVendasProdutos.removeBean(jTable1.getSelectedRow());
+            }
         }
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 

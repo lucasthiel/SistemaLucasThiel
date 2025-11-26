@@ -6,14 +6,15 @@ import javax.swing.table.AbstractTableModel;
 
 public class ControllerVendasProdutos extends AbstractTableModel {
 
-    private List lstVendasProdutos;
+    private List<LltVendaProduto> lstVendasProdutos;
 
-    public void setList(List lstVendasProdutos) {
+    public void setList(List<LltVendaProduto> lstVendasProdutos) {
         this.lstVendasProdutos = lstVendasProdutos;
+        this.fireTableDataChanged();
     }
 
     public LltVendaProduto getBean(int rowIndex) {
-        return (LltVendaProduto) lstVendasProdutos.get(rowIndex);
+        return lstVendasProdutos.get(rowIndex);
     }
 
     public void addBean(LltVendaProduto vendasProdutos) {
@@ -36,8 +37,9 @@ public class ControllerVendasProdutos extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5; 
     }
+
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -47,9 +49,11 @@ public class ControllerVendasProdutos extends AbstractTableModel {
             return vendaProduto.getProduto().getLltIdProduto();
         } else if (columnIndex == 1) {
             return vendaProduto.getProduto().getLltNomeProduto();
-        } else if (columnIndex == 2) {
-            return vendaProduto.getValorUnitario();
+        }else if (columnIndex ==2) {
+            return vendaProduto.getQuantidade();
         } else if (columnIndex == 3) {
+            return vendaProduto.getValorUnitario();
+        } else if (columnIndex == 4) {
             return vendaProduto.getQuantidade() * vendaProduto.getValorUnitario();
         }
 
@@ -66,7 +70,7 @@ public class ControllerVendasProdutos extends AbstractTableModel {
             return "Quantidade";
         } else if (columnIndex == 3) {
             return "Valor Unitário";
-        } else if (columnIndex == 3) {
+        } else if (columnIndex == 4) {
             return "Total";
         }
         return "";
