@@ -414,18 +414,32 @@ public class JDlgVenda extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
+        VendaDAO vendaDAO = new VendaDAO();
+        VendaProdutoDAO pedidosProdutosDAO = new VendaProdutoDAO();
+        LltVenda venda = viewBean();
+        if (incluir == true) {
+            vendaDAO.insert(venda);
+            for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
+                LltVendaProduto pedidosProdutos = controllerVendasProdutos.getBean(ind);
+                pedidosProdutos.setVenda(venda);
+                pedidosProdutosDAO.insert(pedidosProdutos);
+            }
+        } else {
+            vendaDAO.update(venda);
+            //remove todos os pedidosprodutos 
+
+        }
+
+        Util.habilitar(false, jTxtCodigo, jFmtDataNasc, jCboClientes,
+                jCboVendedor, jTxtTotal,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal, jTable1);
+        
         if (!validarData()) {
             return; 
         }
-        VendaDAO vendaDAO = new VendaDAO();
-        if (incluir == true) {
-            vendaDAO.insert(viewBean());
-        } else {
-            vendaDAO.update(viewBean());
-        }
-        Util.habilitar(false, jTxtCodigo, jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal, jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limpar(jTxtCodigo, jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal, jTable1);
+        
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
