@@ -25,7 +25,7 @@ public class JDlgVendaProduto extends javax.swing.JDialog {
     public JDlgVendaProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Pedidos produtos");
+        setTitle("Venda produtos");
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtValorUnitario, jTxtTotal);
         jTxtQuantidade.setText("1");

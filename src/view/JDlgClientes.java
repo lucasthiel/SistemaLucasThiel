@@ -6,6 +6,8 @@ package view;
 
 import bean.LltCliente;
 import dao.ClientesDAO;
+import dao.ProdutosDAO;
+import dao.UsuariosDAO;
 import tools.Util;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -522,12 +524,19 @@ public void beanView(LltCliente clientes) {
 
     private void jBtnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirClienteActionPerformed
         // TODO add your handling code here:
-       if (pesquisando == false) {
-            Util.mensagem("Você precisa pesquisar um usuário primeiro");
+        if (pesquisando) { 
+            if (Util.perguntar("Deseja excluir o registro ?")) {
+        
+            ClientesDAO clientesDAO = new ClientesDAO();
+            clientesDAO.delete(viewBean());
+        
+            Util.limpar(jTxtCodCliente, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente);
+            pesquisando = false;
+        }
         } else {
-                Util.perguntar("Você deseja excluir?");
-                Util.limpar(jTxtCodCliente, jTxtNomeCliente, jTxtEmailCliente, jFmtDataNascimentoCliente, jFmtCpfCliente, jFmtRgCliente, jCboSexoCliente, jTxtEnderecoCliente, jFmtCepCliente, jTxtBairroCliente, jTxtCidadeCliente, jChbAtivoCliente, jFmtCelularCliente, jFmtTelefoneCliente, jTxtReferenciaCliente);  
-        } 
+            Util.mensagem("Pesquise um cliente primeiro");
+    }
+       
 
     }//GEN-LAST:event_jBtnExcluirClienteActionPerformed
 

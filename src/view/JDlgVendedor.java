@@ -5,6 +5,8 @@
 package view;
 
 import bean.LltVendedor;
+import dao.ClientesDAO;
+import dao.ProdutosDAO;
 import dao.VendedorDAO;
 import tools.Util;
 
@@ -296,12 +298,20 @@ public void beanView(LltVendedor vendedores) {
 
     private void jBtnExcluirVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirVendedorActionPerformed
         // TODO add your handling code here:
-        if (pesquisando == false) {
-            Util.mensagem("Você precisa pesquisar um usuário primeiro");
-        } else {
-                Util.perguntar("Você deseja excluir?");
-                Util.limpar(jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor);  
+        if (pesquisando) { 
+            if (Util.perguntar("Deseja excluir o registro ?")) {
+        
+            VendedorDAO vendedorDAO = new VendedorDAO();
+            vendedorDAO.delete(viewBean());
+        
+            Util.limpar(jTxtCodVendedor, jTxtNomeVendedor, jTxtEmailVendedor, jFmtCpfVendedor, jCboSexoVendedor, jFmtCelularVendedor, jTxtCidadeVendedor);
+            pesquisando = false;
         }
+        } else {
+            Util.mensagem("Pesquise um vendedor primeiro");
+    }
+      
+
     }//GEN-LAST:event_jBtnExcluirVendedorActionPerformed
 
     private void jBtnAlterarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarVendedorActionPerformed

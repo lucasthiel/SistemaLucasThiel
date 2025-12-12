@@ -314,12 +314,19 @@ public void beanView(LltProduto produtos) {
 
     private void jBtnExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdutoActionPerformed
         // TODO add your handling code here:
-        if (pesquisando == false) {
-            Util.mensagem("Você precisa pesquisar um usuário primeiro");
-        } else {
-                Util.perguntar("Você deseja excluir?");
-                Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);  
+        if (pesquisando) { 
+            if (Util.perguntar("Deseja excluir o registro ?")) {
+        
+            ProdutosDAO produtosDAO = new ProdutosDAO();
+            produtosDAO.delete(viewBean());
+        
+            Util.limpar(jTxtCodProduto, jTxtNomeProduto, jCboMarcaProduto, jCboCategoriaProduto, jCboTamanhoProduto, jCboCorProduto, jTxtPrecoProduto, jBtnConfirmarProduto, jBtnCancelarProduto);
+            pesquisando = false;
         }
+        } else {
+            Util.mensagem("Pesquise um produto primeiro");
+    }
+        
     }//GEN-LAST:event_jBtnExcluirProdutoActionPerformed
 
     private void jBtnAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdutoActionPerformed

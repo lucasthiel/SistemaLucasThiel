@@ -598,11 +598,18 @@ public void beanView(LltUsuario usuarios) {
 
     private void jBtnExcluirUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirUsuActionPerformed
         // TODO add your handling code here:
-        if (Util.perguntar("Deseja Excluir?") == true) {
+        if (pesquisando) { 
+            if (Util.perguntar("Deseja excluir o registro ?")) {
+        
             UsuariosDAO usuariosDAO = new UsuariosDAO();
             usuariosDAO.delete(viewBean());
+        
+            Util.limpar(jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu);
+            pesquisando = false;
         }
-            Util.limpar(jTxtCodUsu, jTxtNomeUsu, jTxtApelidoUsu, jFmtCpfUsu, jFmtDataNascimentoUsu, jPwfSenhaUsu, jCboNivelUsu, jChbAtivoUsu);  
+        } else {
+            Util.mensagem("Pesquise um usuario primeiro");
+    }
         
     }//GEN-LAST:event_jBtnExcluirUsuActionPerformed
 

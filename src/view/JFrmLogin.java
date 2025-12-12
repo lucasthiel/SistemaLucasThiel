@@ -19,6 +19,7 @@ public class JFrmLogin extends javax.swing.JFrame {
      */
     public JFrmLogin() {
         initComponents();
+        setTitle("Login");
         setLocationRelativeTo(null);
     }
 
@@ -34,7 +35,7 @@ public class JFrmLogin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
-        jTxtUsuario = new javax.swing.JTextField();
+        jTxtApelidoUsu = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPwfSenha = new javax.swing.JPasswordField();
         jBtnEntrar = new javax.swing.JButton();
@@ -47,7 +48,7 @@ public class JFrmLogin extends javax.swing.JFrame {
         setTitle("Tela de Login");
         setLocation(new java.awt.Point(0, 0));
 
-        jLabel1.setText("USUÁRIO:");
+        jLabel1.setText("APELIDO:");
 
         jLabel2.setText("SENHA:");
 
@@ -77,7 +78,7 @@ public class JFrmLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtApelidoUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -87,7 +88,7 @@ public class JFrmLogin extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTxtApelidoUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -107,7 +108,7 @@ public class JFrmLogin extends javax.swing.JFrame {
 
     private void jBtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEntrarActionPerformed
         // TODO add your handling code here:
-        String valorUsuario = jTxtUsuario.getText();
+        String valorUsuario = jTxtApelidoUsu.getText();
         String valorSenha = new String(jPwfSenha.getPassword());
 
         UsuariosDAO usuarioDAO = new UsuariosDAO();
@@ -118,7 +119,7 @@ public class JFrmLogin extends javax.swing.JFrame {
             JFrmPrincipal.setVisible(true);
             dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "usuario ou senha incorretos");
+            JOptionPane.showMessageDialog(null, "apelido ou senha incorretos");
             contador--;
             if (contador == 0) {
                 JOptionPane.showMessageDialog(null, "3 tentativas falhas");
@@ -169,6 +170,6 @@ public class JFrmLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPwfSenha;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTxtUsuario;
+    private javax.swing.JTextField jTxtApelidoUsu;
     // End of variables declaration//GEN-END:variables
 }

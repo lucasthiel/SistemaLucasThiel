@@ -62,6 +62,7 @@ public class JDlgVenda extends javax.swing.JDialog {
     public JDlgVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setTitle("Cadastro de Vendas");
         setLocationRelativeTo(null);
         jFmtDataNasc.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
@@ -379,7 +380,7 @@ public class JDlgVenda extends javax.swing.JDialog {
 
             Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
 
-            Util.limpar(jTxtCodigo, jTxtTotal, jCboClientes, jCboVendedor, jFmtDataNasc);
+            Util.limpar(jTxtCodigo, jTxtTotal, jCboClientes, jCboVendedor, jFmtDataNasc, jTable1);
             jTxtCodigo.grabFocus();
             
             incluir = true;
@@ -431,6 +432,8 @@ public class JDlgVenda extends javax.swing.JDialog {
         // TODO add your handling code here:
         Util.habilitar(false, jTxtCodigo, jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jFmtDataNasc, jCboClientes, jCboVendedor, jTxtTotal, jTable1);
+        
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
