@@ -417,6 +417,7 @@ public class JDlgVenda extends javax.swing.JDialog {
         VendaDAO vendaDAO = new VendaDAO();
         VendaProdutoDAO pedidosProdutosDAO = new VendaProdutoDAO();
         LltVenda venda = viewBean();
+        
         if (incluir == true) {
             vendaDAO.insert(venda);
             for (int ind = 0; ind < jTable1.getRowCount(); ind++) {

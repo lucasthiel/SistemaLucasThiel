@@ -5,15 +5,12 @@
  */
 package dao;
 
+import bean.LltProduto;
 import bean.LltUsuario;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
-/**
- *
- * @author u1845853
- */
 public class UsuariosDAO extends AbstractDAO {
 
     @Override
@@ -45,7 +42,7 @@ public class UsuariosDAO extends AbstractDAO {
     public Object list(int codigo) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(LltUsuario.class);
-        criteria.add(Restrictions.eq("idusuarios", codigo) );
+        criteria.add(Restrictions.eq("lltIdUsuario", codigo));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -59,18 +56,47 @@ public class UsuariosDAO extends AbstractDAO {
         session.getTransaction().commit();
         return lista;
     }
-    
-    public boolean listLogin(String user, String pass) {
+
+    public Object listNome(String nome) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(LltUsuario.class);
-        criteria.add(Restrictions.eq("lltApelido", user));
-        criteria.add(Restrictions.eq("lltSenha", pass));
+        criteria.add(Restrictions.like("lltNome", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
 
-        List resultado = criteria.list();
+    public Object listApelido(String apelido) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LltUsuario.class);
+        criteria.add(Restrictions.like("lltApelido", "%" + apelido + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public Object listNomeApelido(String nome, String apelido) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LltUsuario.class);
+        criteria.add(Restrictions.like("lltNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("lltApelido", "%" + apelido + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public boolean listLogin(String apelido, String senha) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LltUsuario.class);
+        criteria.add(Restrictions.eq("lltApelido", apelido));
+        criteria.add(Restrictions.eq("lltSenha", senha));
+
+        List lista = criteria.list();
         session.getTransaction().commit();
 
-        return !resultado.isEmpty();
+        return !lista.isEmpty();
     }
+
 
     public static void main(String[] args) {
         UsuariosDAO usuariosDAO = new UsuariosDAO();

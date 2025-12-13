@@ -1,20 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import bean.LltProduto;
-import bean.LltUsuario;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
-/**
- *
- * @author u1845853
- */
 public class ProdutosDAO extends AbstractDAO {
 
     @Override
@@ -46,7 +36,38 @@ public class ProdutosDAO extends AbstractDAO {
     public Object list(int codigo) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(LltProduto.class);
-        criteria.add(Restrictions.eq("idprodutos", codigo) );
+        criteria.add(Restrictions.eq("lltIdProduto", codigo));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    // Buscar por nome
+    public Object listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LltProduto.class);
+        criteria.add(Restrictions.like("lltNomeProduto", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    // Buscar por preço (valor)
+    public Object listValor(double valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LltProduto.class);
+        criteria.add(Restrictions.ge("lltPreco", valor));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    // Buscar por nome E preço
+    public Object listNomeValor(String nome, double valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LltProduto.class);
+        criteria.add(Restrictions.like("lltNomeProduto", "%" + nome + "%"));
+        criteria.add(Restrictions.ge("lltPreco", valor));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

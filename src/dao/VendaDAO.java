@@ -5,6 +5,7 @@
  */
 package dao;
 
+import bean.LltUsuario;
 import bean.LltVenda;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -55,6 +56,34 @@ public class VendaDAO extends AbstractDAO {
     public Object listAll() {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(LltVenda.class);
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    public Object listVendedor(String vendedor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LltUsuario.class);
+        criteria.add(Restrictions.like("lltIdVendedor", "%" + vendedor + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public Object listCliente(String cliente) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LltUsuario.class);
+        criteria.add(Restrictions.like("lltIdCliente", "%" + cliente + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public Object listVendedorCliente(String cliente, String vendedor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LltUsuario.class);
+        criteria.add(Restrictions.like("lltIdVendedor", "%" + vendedor + "%"));
+        criteria.add(Restrictions.like("lltIdCliente", "%" + cliente + "%"));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
