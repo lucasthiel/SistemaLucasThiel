@@ -9,6 +9,7 @@ import bean.LltUsuario;
 import bean.LltVenda;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -63,27 +64,32 @@ public class VendaDAO extends AbstractDAO {
     
     public Object listVendedor(String vendedor) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(LltUsuario.class);
-        criteria.add(Restrictions.like("lltIdVendedor", "%" + vendedor + "%"));
+        Criteria criteria = session.createCriteria(LltVenda.class, "v");
+        criteria.createAlias("v.lltVendedor", "u");
+        criteria.add(Restrictions.like("u.lltNome", vendedor, MatchMode.ANYWHERE));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
+
+
 
     public Object listCliente(String cliente) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(LltUsuario.class);
-        criteria.add(Restrictions.like("lltIdCliente", "%" + cliente + "%"));
+        Criteria criteria = session.createCriteria(LltVenda.class, "v");
+        criteria.createAlias("v.lltCliente", "c");
+        criteria.add(Restrictions.like("c.lltNome", cliente, MatchMode.ANYWHERE));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
 
+
     public Object listVendedorCliente(String cliente, String vendedor) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(LltUsuario.class);
-        criteria.add(Restrictions.like("lltIdVendedor", "%" + vendedor + "%"));
-        criteria.add(Restrictions.like("lltIdCliente", "%" + cliente + "%"));
+        Criteria criteria = session.createCriteria(LltVenda.class);
+        criteria.add(Restrictions.like("u.lltNome", vendedor, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.like("c.lltNome", cliente, MatchMode.ANYWHERE));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
