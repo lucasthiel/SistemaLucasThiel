@@ -275,18 +275,26 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
     private void jMnuConsProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsProdActionPerformed
         // TODO add your handling code here:
+        JDlgConsultaProdutos jDlgConsultaProdutos = new JDlgConsultaProdutos(this, true);
+        jDlgConsultaProdutos.setVisible(true);
     }//GEN-LAST:event_jMnuConsProdActionPerformed
 
     private void jMnuConsUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsUsuActionPerformed
         // TODO add your handling code here:
+        JDlgConsultaUsuarios jDlgConsultaUsuarios = new JDlgConsultaUsuarios(this, true);
+        jDlgConsultaUsuarios.setVisible(true);
     }//GEN-LAST:event_jMnuConsUsuActionPerformed
 
     private void jMnuConsClieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsClieActionPerformed
         // TODO add your handling code here:
+        JDlgConsultaClientes jDlgConsultaClientes = new JDlgConsultaClientes(this, true);
+        jDlgConsultaClientes.setVisible(true);
     }//GEN-LAST:event_jMnuConsClieActionPerformed
 
     private void jMnuConsVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsVendaActionPerformed
         // TODO add your handling code here:
+        JDlgConsultaVenda jDlgConsultaVenda = new JDlgConsultaVenda(this, true);
+        jDlgConsultaVenda.setVisible(true);
     }//GEN-LAST:event_jMnuConsVendaActionPerformed
 
     private void jBtnUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnUsuActionPerformed

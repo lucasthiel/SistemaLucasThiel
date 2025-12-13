@@ -1,6 +1,7 @@
 package view;
 
 import bean.LltCliente;
+import bean.LltProduto;
 import bean.LltVenda;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -30,11 +31,12 @@ public class ControllerConsultasVenda extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        LltVenda venda = (LltVenda) lstVenda.get(rowIndex);
-
-        if (columnIndex == 0) {
-            return venda.getLltIdVendedor();
-        } else if (columnIndex == 1) {
+        LltVenda venda = (LltVenda) lstVenda.get( rowIndex);
+        if ( columnIndex == 0 ){
+            return venda.getLltIdVenda();
+        } else if (columnIndex ==1) {
+            return venda.getLltIdVendedor();        
+        } else if (columnIndex ==2) {
             return venda.getLltIdCliente();
         } 
         return "";
@@ -42,11 +44,13 @@ public class ControllerConsultasVenda extends AbstractTableModel {
 
     @Override
     public String getColumnName(int columnIndex) {
-        if (columnIndex == 0) {
-            return "Vendedor";
-        } else if (columnIndex == 1) {
+        if ( columnIndex == 0) {
+            return "Código";
+        } else if ( columnIndex == 1) {
+            return "Vendedor";         
+        } else if ( columnIndex == 2) {
             return "Cliente";
-        } 
+        }
         return "";
     }
 }

@@ -474,6 +474,7 @@ public class JDlgVenda extends javax.swing.JDialog {
         // TODO add your handling code here:
         JDlgVendaProduto jDlgVendaProduto = new JDlgVendaProduto(null, true);
         jDlgVendaProduto.setVisible(true);
+        jDlgVendaProduto.setTelaAnterior(this);
     }//GEN-LAST:event_jBtnAlterarProdActionPerformed
 
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
